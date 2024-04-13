@@ -1,0 +1,54 @@
+body{
+  padding:0;
+  margin:0;
+  box-sizing:border-box;
+  background:'white';
+}
+.blog-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.search-container {
+  position: fixed;
+  top: 20px;
+  width: 100%;
+  z-index: 1000;
+}
+
+
+.commands-list {
+  margin-top: 40px; /* Adjust as needed */
+}
+
+.command {
+  margin-bottom: 20px;
+  padding: 20px;
+  /* background-color: #f7f7f7; */
+  background-color: #d7f1f9;
+  color:black;
+  border-radius: 5px;
+}
+
+.command h2 {
+  margin-top: 0;
+}
+
+.command p {
+  margin: 10px 0;
+}
+
+.command code {
+  /* background-color: #i f0f0f0; */
+  background-color: black;
+  color:white;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size:14px;
+}
+
+input{
+  padding:5px;
+} 
