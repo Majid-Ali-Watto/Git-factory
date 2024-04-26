@@ -1,6 +1,6 @@
-import './App.css'
-import React,{useState} from 'react';
-import gitCommands from './commandsData.js'
+import "./App.css";
+import React, { useState } from "react";
+import gitCommands from "./commandsData.js";
 const GitCommand = ({ command }) => {
   return (
     <div className="command">
@@ -17,7 +17,7 @@ const GitCommand = ({ command }) => {
 };
 
 const GitCommandsBlog = ({ commands }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -32,8 +32,6 @@ const GitCommandsBlog = ({ commands }) => {
 
   return (
     <div className="blog-container">
-      <h1>Essential Git Commands Every Developer Should Know</h1>
-      <p>Developer and Author - Majid Ali</p>
       <div className="search-container">
         <input
           type="text"
@@ -42,12 +40,17 @@ const GitCommandsBlog = ({ commands }) => {
           onChange={handleSearchChange}
         />
       </div>
+
+      <div className="devMetaData">
+       <h3>Git Commands List ({filteredCommands.length})</h3> 
+         <h3>Developer and Author - Majid Ali
+           </h3>
+         </div>
       <div className="commands-list">
         {filteredCommands.map((command, index) => (
           <GitCommand key={index} command={command} />
         ))}
       </div>
-     
     </div>
   );
 };

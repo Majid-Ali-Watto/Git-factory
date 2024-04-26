@@ -42,11 +42,18 @@ const gitCommands = [
     code: 'git commit -m "Add new feature"',
   },
   {
+    name: 'git push -u origin [branch]',
+    description: 'Push the specified branch to the remote repository and set it as the upstream branch. It is needed for first time, after pushing at least once, upstream is not needed.',
+    example: 'To push the local branch named "feature" to the remote repository named "origin" and set it as the upstream branch, run:',
+    code: 'git push -u origin feature',
+  },
+  {
     name: 'git push [remote] [branch]',
     description: 'Upload local repository content to a remote repository.',
     example: 'To push changes from your local "master" branch to the remote "origin" repository, run:',
     code: 'git push origin master',
   },
+
   {
     name: 'git pull [remote] [branch]',
     description: 'Fetch changes from a remote repository and merge them into the current branch.',
@@ -65,6 +72,19 @@ const gitCommands = [
     example: 'To switch to a branch named "feature", run:',
     code: 'git checkout feature',
   },
+  {
+    name: 'git checkout -b [branch]',
+    description: 'Create a new branch and switch to it.',
+    example: 'To create a new branch named "feature" and switch to it, run:',
+    code: 'git checkout -b feature',
+  },
+  {
+    name: 'git switch [branch_name]',
+    description: 'Switch to the specified branch.',
+    example: 'To switch to a branch named "feature", run:',
+    code: 'git switch feature',
+  },
+
   {
     name: 'git merge [branch_name]',
     description: 'Combine changes from the specified branch into the current branch.',
@@ -143,6 +163,13 @@ const gitCommands = [
     example: 'To reset the current branch and index to the state of a commit with hash "abcd123", run:',
     code: 'git reset --hard abcd123',
   },
+      {
+        name: 'git restore [file]',
+        description: 'Restore changes in the working directory for a file to their state at the last commit.',
+        example: 'To restore changes in the working directory for a file named "index.html" to their state at the last commit, run:',
+        code: 'git restore index.html',
+      }
+,
   {
     name: 'git fetch [remote]',
     description: 'Download objects and refs from another repository.',
