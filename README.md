@@ -1,17 +1,19 @@
-## Running React on Repl.it
+# Git Command Reference Guide
 
-[React](https://reactjs.org/) is a popular JavaScript library for building user interfaces.
+Welcome to the Git Command Reference Guide! This app provides a comprehensive list of Git commands along with descriptions, examples, and usage instructions. Whether you're a beginner or an experienced developer, this guide will help you efficiently navigate Git's powerful version control features.
 
-[Vite](https://vitejs.dev/) is a blazing fast frontend build tool that includes features like Hot Module Reloading (HMR), optimized builds, and TypeScript support out of the box.
+## Features
 
-Using the two in conjunction is one of the fastest ways to build a web app.
+- **Comprehensive Git Commands**: Access a wide range of Git commands, from basic to advanced, all in one place.
+- **Clear Descriptions**: Each command is accompanied by a clear and concise description to help you understand its purpose.
+- **Examples with Code**: Practical examples and code snippets are provided for each command, making it easier to understand how to use them.
+- **Easy Navigation**: Quickly find the command you need with a simple and intuitive interface.
 
-### Getting Started
-- Hit run
-- Edit [App.jsx](#src/App.jsx) and watch it live update!
+## Installation
 
-By default, Replit runs the `dev` script, but you can configure it by changing the `run` field in the [configuration file](#.replit). Here are the vite docs for [serving production websites](https://vitejs.dev/guide/build.html)
+To set up and run the application locally, follow these steps:
 
-### Typescript
-
-Just rename any file from `.jsx` to `.tsx`. You can also try our [TypeScript Template](https://replit.com/@replit/React-TypeScript)
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Majid-Ali-Watto/Git-factory.git
+   ```
