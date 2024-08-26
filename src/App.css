@@ -1,17 +1,29 @@
+/* General reset */
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  /* background: white; */
   font-family: Arial, sans-serif;
 }
 
+body {
+  background-color: #f4f4f9;
+  color: #333;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Smooth scrolling */
+}
 
 .blog-container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 80px 20px 20px;
-  /* Added top padding to accommodate fixed header */
+  padding: 70px 20px 20px;
+}
+
+.commands-list {
+  margin-bottom: 10px;
 }
 
 .search-container {
@@ -33,16 +45,35 @@
   .search-container {
     flex-direction: column;
     padding: 10px;
+    /* Ensure space for icon buttons */
   }
 
-  .search-container input,
-  .search-container button {
+  .search-container input {
     width: 90%;
     margin-bottom: 10px;
+    /* Space between search input and icon buttons */
   }
 
-  .search-container button {
-    margin-bottom: 0;
+  .selection-buttons {
+    flex-direction: row;
+    /* Align buttons in a row */
+    justify-content: space-between;
+    /* Space out buttons */
+    width: 100%;
+    /* Full width for better alignment */
+  }
+
+  .header-icon {
+    width: 20px;
+    /* Smaller size for smaller screens */
+    height: 20px;
+    margin: 0 5px;
+    /* Adjust spacing for smaller screens */
+  }
+
+
+  .blog-container {
+    padding: 110px 20px 20px;
   }
 }
 
@@ -53,9 +84,11 @@
   border-radius: 4px;
   font-size: 14px;
 }
-input:focus{
+
+input:focus {
   outline: 1px solid skyblue;
 }
+
 .search-container button {
   padding: 8px 16px;
   font-size: 14px;
@@ -70,38 +103,147 @@ input:focus{
   background-color: #0056b3;
 }
 
-.devMetaData {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin: 20px 0;
-}
-
 .command {
+  position: relative;
+  /* Ensure the checkbox can be positioned absolutely within this container */
   margin-bottom: 20px;
   padding: 20px;
-  background-color: #d7f1f9;
-  color: black;
-  border-radius: 5px;
-  word-break: break-word;
+  background-color: #ffffff;
+  border: 1px solid #e1e1e1;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.command h2,
-h1 {
+.command:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.command h2 {
   margin-top: 0;
+  font-size: 24px;
+  color: #333;
 }
 
 .command p {
   margin: 10px 0;
+  line-height: 1.6;
   text-align: justify;
 }
 
+.command pre {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #282c34;
+  border-radius: 4px;
+  position: relative;
+}
+
 .command code {
-  background-color: black;
-  color: white;
-  padding: 3px 6px;
-  border-radius: 3px;
+  color: #f5f5f5;
   font-size: 14px;
+  display: block;
+  padding-right: 60px;
+  /* Ensure space for the button */
+  overflow-x: auto;
+}
+
+.copy-button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.copy-button:hover {
+  background-color: #0056b3;
+}
+
+.checkbox {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transform: scale(1.2);
+  /* Optional: scale the checkbox for better visibility */
+}
+
+.copy-selected-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  display: block;
+  /* Ensure it's block level to center it easily */
+  width: fit-content;
+  /* Adjust as needed */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.copy-selected-button:hover {
+  background-color: #0056b3;
+}
+
+.selection-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  /* margin-bottom: 10px; */
+}
+
+.select-all-button,
+.unselect-all-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.select-all-button:hover,
+.unselect-all-button:hover {
+  background-color: #0056b3;
+}
+
+.header-icon {
+  width: 24px;
+  /* Adjust the size as needed */
+  height: 24px;
+  margin: 0 10px;
+  /* Adjust spacing between icons */
+  cursor: pointer;
+  vertical-align: middle;
+  /* Align icons with text */
+  transition: opacity 0.3s ease;
+}
+
+.header-icon:hover {
+  opacity: 0.7;
+  /* Slightly transparent on hover */
+}
+
+/* Ensure responsive layout */
+@media (max-width: 600px) {
+  .header-icon {
+    /* width: 20px;
+    height: 20px; */
+    margin: 0 5px;
+    /* Adjust spacing for smaller screens */
+  }
 }
 
 footer {

@@ -1,27 +1,49 @@
 {
-  "name": "react-javascript",
-  "version": "1.0.0",
-  "type": "module",
-  "description": "React TypeScript on Replit, using Vite bundler",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "@vitejs/plugin-react": "^4.2.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.0"
-  },
-  "dependencies": {
-    "jspdf": "^2.5.1",
-    "jspdf-autotable": "^3.8.2"
-  }
+	"name": "react-javascript",
+	"version": "1.0.0",
+	"type": "module",
+	"description": "This app provides a comprehensive list of Git commands along with descriptions, examples, and usage instructions.",
+	"scripts": {
+		"dev": "vite --host",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"keywords": [
+		"Git commands",
+		"Git tutorial",
+		"Git examples",
+		"Version control",
+		"Git usage",
+		"Git documentation",
+		"Source code management",
+		"Git repository",
+		"Git tips",
+		"Git cheat sheet",
+		"Git basics",
+		"Git workflow",
+		"GitHub integration",
+		"Git CLI",
+		"Git best practices",
+		"Git guide",
+		"Git versioning",
+		"Software development",
+		"Git automation",
+		"Git scripting"
+	],
+	"author": "Majid Ali",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/react": "^18.2.37",
+		"@types/react-dom": "^18.2.15",
+		"@vitejs/plugin-react": "^4.2.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"typescript": "^5.2.2",
+		"vite": "^5.0.0"
+	},
+	"dependencies": {
+		"jspdf": "^2.5.1",
+		"jspdf-autotable": "^3.8.2",
+		"sweetalert2": "^11.12.4"
+	}
 }

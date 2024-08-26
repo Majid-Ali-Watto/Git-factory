@@ -128,6 +128,12 @@ const gitCommands = [
 		code: "git stash"
 	},
 	{
+		name: "git stash apply",
+		description: "Applies a stash to the working directory.",
+		example: `git stash apply stash@{0}. If you don't specify a stash, the most recent stash is applied.`,
+		code: `git stash apply stash@{0}\t\tOR\t\tgit stash apply`
+	},
+	{
 		name: "git tag [tag_name]",
 		description: "Create a lightweight tag pointing to the current commit.",
 		example: 'To create a tag named "v1.0" for the current commit, run:',
@@ -167,7 +173,7 @@ const gitCommands = [
 		name: "git reset --soft [commit]",
 		description: "Reset the current branch to a specified commit but keep changes in the working directory.",
 		example: 'To reset the current branch to a commit with hash "abcd123" but keep changes in the working directory, run:',
-		code: "git reset --soft abcd123",
+		code: "git reset --soft abcd123"
 	},
 	{
 		name: "git restore [file]",
@@ -179,37 +185,37 @@ const gitCommands = [
 		name: "git stash pop",
 		description: "Apply the most recent stash and remove it from the stash list.",
 		example: "To apply and remove the most recent stash, run:",
-		code: "git stash pop",
+		code: "git stash pop"
 	},
 	{
 		name: "git stash list",
 		description: "List all stashed changes.",
 		example: "To list all stashed changes, run:",
-		code: "git stash list",
+		code: "git stash list"
 	},
 	{
 		name: "git stash drop [stash]",
 		description: "Remove a specific stash.",
 		example: 'To remove a stash named "stash@{0}", run:',
-		code: "git stash drop stash@{0}",
+		code: "git stash drop stash@{0}"
 	},
 	{
 		name: "git stash clear",
 		description: "Remove all stashed changes.",
 		example: "To remove all stashed changes, run:",
-		code: "git stash clear",
+		code: "git stash clear"
 	},
 	{
 		name: "git gc",
 		description: "Cleanup unnecessary files and optimize the local repository.",
 		example: "To run garbage collection and optimize the repository, run:",
-		code: "git gc",
+		code: "git gc"
 	},
 	{
 		name: "git commit --allow-empty -m 'message'",
 		description: "Create an empty commit with a message.",
 		example: "To create an empty commit with the message 'Initial commit', run:",
-		code: "git commit --allow-empty -m 'Initial commit'",
+		code: "git commit --allow-empty -m 'Initial commit'"
 	},
 	{
 		name: "git fetch [remote]",
