@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import gitCommands from "../commandsData.js";
+import gitCommands from "../assets/commandsData.js";
 import CommandCard from "./Command-Card.jsx";
 import download from "../utils/download.js";
 import Swal from "sweetalert2";
+import { Loader } from "circle-loader";
 const options = {
 	position: "center",
 	icon: "success",
@@ -51,9 +52,10 @@ const GitCommandsList = () => {
 	};
 
 	const filteredCommands = gitCommands.filter((command) => {
+		Loader.close();
 		const query = searchQuery.toLowerCase();
-		const { code, name, description } = command;
-		return [name, description, code].some((cmd) => cmd.toLowerCase().includes(query));
+		const { code, name, description, basic } = command;
+		return [name, description, code, basic].some((cmd) => cmd?.toLowerCase()?.includes(query));
 	});
 
 	const scrollToTop = () => {
@@ -77,7 +79,7 @@ const GitCommandsList = () => {
 			<header className="search-container">
 				<input
 					type="search"
-					placeholder="Search commands..."
+					placeholder="Type `basic commands` Or Search commands..."
 					value={searchQuery}
 					onChange={handleSearchChange}
 				/>

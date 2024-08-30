@@ -1,101 +1,117 @@
 const gitCommands = [
 	{
 		name: 'git config --global user.name "Your Name"',
-		description: "Set your username globally.",
+		description: "This command is used to set the name that will be associated with your commits in Git repositories. This name will appear in the metadata of your commits, identifying you as the author.",
 		example: "To set your username globally, run:",
-		code: 'git config --global user.name "Your Name"'
+		code: 'git config --global user.name "Your Name"',
+		basic: "basic commands"
 	},
 	{
 		name: 'git config --global user.email "your_email@example.com"',
-		description: "Set your email globally.",
+		description: " This command sets the email address that will be associated with your commits globally. This email address will appear in the metadata of your commits, identifying you as the author.",
 		example: "To set your email globally, run:",
-		code: 'git config --global user.email "your_email@example.com"'
+		code: 'git config --global user.email "your_email@example.com"',
+		basic: "basic commands"
 	},
 	{
 		name: "git init",
-		description: "Initialize a new Git repository in the current directory.",
+		description: "This command initializes a new Git repository in the current directory. It sets up the necessary files and directories for Git to start tracking changes in your project.",
 		example: "To start tracking changes in a new project, navigate to the project directory and run:",
-		code: "git init"
+		code: "git init",
+		basic: "basic commands"
 	},
 	{
 		name: "git clone [url]",
 		description: "Clone a repository from a remote source to your local machine.",
 		example: "To clone a repository from GitHub, you can run:",
-		code: "git clone https://github.com/user/repository.git"
+		code: "git clone https://github.com/user/repository.git",
+		basic: "basic commands"
 	},
 	{
 		name: "git status",
-		description: "Check the status of your working directory.",
+		description: "This command is used to check the status of your working directory and staging area. It shows you which files have been modified, which files are staged for commit, and which files are untracked by Git.",
 		example: "To see which files have been modified since your last commit, run:",
-		code: "git status"
+		code: "git status",
+		basic: "basic commands"
 	},
 	{
 		name: "git add [file]",
-		description: "Add changes in the working directory to the staging area.",
-		example: 'To stage a file named "index.html" for the next commit, run:',
-		code: "git add index.html"
+		description: "This command adds changes in the working directory to the staging area. The staging area is a place where you can gather changes you want to include in your next commit. By using git add, you tell Git to include the changes made to a specific file (or files) in the next commit.",
+		example: 'To stage a file named "index.html" (git add . for all files) for the next commit, run:',
+		code: `git add index.html\t\tOR\t\tgit add .`,
+		basic: "basic commands"
 	},
 	{
 		name: 'git commit -m "Commit message"',
-		description: "Record changes to the repository with a descriptive message.",
+		description: " This command records the changes that have been staged in the repository with a descriptive message. The commit message should summarize the changes made in the commit, providing context and information about the purpose of the changes.",
 		example: 'To commit staged changes with the message "Add new feature", run:',
-		code: 'git commit -m "Add new feature"'
+		code: 'git commit -m "Add new feature"',
+		basic: "basic commands"
 	},
 	{
 		name: "git push -u origin [branch]",
 		description: "Push the specified branch to the remote repository and set it as the upstream branch. It is needed for first time, after pushing at least once, upstream is not needed.",
 		example: 'To push the local branch named "feature" to the remote repository named "origin" and set it as the upstream branch, run:',
-		code: "git push -u origin feature"
+		code: "git push -u origin feature",
+		basic: "basic commands"
 	},
 	{
 		name: "git push [remote] [branch]",
 		description: "Upload local repository content to a remote repository.",
 		example: 'To push changes from your local "master" branch to the remote "origin" repository, run:',
-		code: "git push origin master"
+		code: "git push origin master",
+		basic: "basic commands"
 	},
 
 	{
 		name: "git pull [remote] [branch]",
 		description: "Fetch changes from a remote repository and merge them into the current branch.",
 		example: 'To fetch and merge changes from the remote "origin" repository into your local "master" branch, run:',
-		code: "git pull origin master"
+		code: "git pull origin master",
+		basic: "basic commands"
 	},
 	{
 		name: "git branch",
 		description: "List all branches in the repository.",
 		example: "To list all branches in the repository, run:",
-		code: "git branch"
+		code: "git branch",
+		basic: "basic commands"
 	},
 	{
 		name: "git checkout [branch_name]",
 		description: "Switch to the specified branch.",
 		example: 'To switch to a branch named "feature", run:',
-		code: "git checkout feature"
+		code: "git checkout feature",
+		basic: "basic commands"
 	},
 	{
 		name: "git checkout -b [branch]",
 		description: "Create a new branch and switch to it.",
 		example: 'To create a new branch named "feature" and switch to it, run:',
-		code: "git checkout -b feature"
+		code: "git checkout -b feature",
+		basic: "basic commands"
 	},
 	{
 		name: "git switch [branch_name]",
 		description: "Switch to the specified branch.",
 		example: 'To switch to a branch named "feature", run:',
-		code: "git switch feature"
+		code: "git switch feature",
+		basic: "basic commands"
 	},
 
 	{
 		name: "git merge [branch_name]",
 		description: "Combine changes from the specified branch into the current branch.",
 		example: 'To merge changes from the "feature" branch into the current branch, run:',
-		code: "git merge feature"
+		code: "git merge feature",
+		basic: "basic commands"
 	},
 	{
 		name: "git remote add [name] [url]",
 		description: "Add a new remote repository.",
 		example: 'To add a remote repository named "origin" with URL "https://github.com/user/repository.git", run:',
-		code: "git remote add origin https://github.com/user/repository.git"
+		code: "git remote add origin https://github.com/user/repository.git",
+		basic: "basic commands"
 	},
 	{
 		name: "git remote -v",
@@ -123,10 +139,19 @@ const gitCommands = [
 	},
 	{
 		name: "git stash",
-		description: "Temporarily shelve changes you've made to your working copy.",
+		description: "This command saves your current working directory's changes into a 'stash' so you can work on something else, like switching branches, without losing your uncommitted changes. The working directory is then restored to the state of the last commit.",
 		example: "To stash changes in your working directory, run:",
-		code: "git stash"
+		code: "git stash",
+		basic: "basic commands"
 	},
+	{
+		name: 'git stash save "Work in progress on feature X"',
+		description: "Stash changes with a descriptive message for easier identification later.",
+		example: "To stash changes with a specific message, run:",
+		code: 'git stash save "Work in progress on feature X"',
+		basic: "basic commands"
+	},
+
 	{
 		name: "git stash apply",
 		description: "Applies a stash to the working directory.",
@@ -137,7 +162,46 @@ const gitCommands = [
 		name: "git tag [tag_name]",
 		description: "Create a lightweight tag pointing to the current commit.",
 		example: 'To create a tag named "v1.0" for the current commit, run:',
-		code: "git tag v1.0"
+		code: "git tag v1.0",
+		basic: "basic commands"
+	},
+	{
+		name: 'git tag -a [tag_name] -m "message"',
+		description: "Create an annotated tag with a descriptive message.",
+		example: 'To create an annotated tag named "v1.0" with the message "Version 1.0 release", run:',
+		code: 'git tag -a v1.0 -m "Version 1.0 release"',
+		basic: "basic commands"
+	},
+	{
+		name: "git tag -d [tag_name]",
+		description: "Delete a tag from the local repository.",
+		example: 'To delete the tag named "v1.0", run:',
+		code: "git tag -d v1.0",
+	},
+	{
+		name: "git tag -l",
+		description: "List all tags in the repository.",
+		example: "To list all tags, run:",
+		code: "git tag -l",
+	},
+	{
+		name: "git show [tag_name]",
+		description: "Show detailed information about a specific tag.",
+		example: 'To show details about the tag named "v1.0", run:',
+		code: "git show v1.0",
+	},
+	{
+		name: "git push origin [tag_name]",
+		description: "Push a specific tag to the remote repository.",
+		example: 'To push the tag named "v1.0" to the remote repository, run:',
+		code: "git push origin v1.0",
+		basic: "basic commands"
+	},
+	{
+		name: "git push --tags",
+		description: "Push all tags to the remote repository.",
+		example: "To push all local tags to the remote repository, run:",
+		code: "git push --tags",
 	},
 	{
 		name: "git rebase [branch]",
@@ -185,7 +249,8 @@ const gitCommands = [
 		name: "git stash pop",
 		description: "Apply the most recent stash and remove it from the stash list.",
 		example: "To apply and remove the most recent stash, run:",
-		code: "git stash pop"
+		code: "git stash pop",
+		basic: "basic commands"
 	},
 	{
 		name: "git stash list",
@@ -219,9 +284,10 @@ const gitCommands = [
 	},
 	{
 		name: "git fetch [remote]",
-		description: "Download objects and refs from another repository.",
+		description: "This command is used to download objects and references (refs) from another repository, typically a remote repository. It updates your local repository with the latest commits, branches, and tags from the remote repository without merging them into your working branch.",
 		example: 'To download objects and refs from the remote repository "origin", run:',
-		code: "git fetch origin"
+		code: "git fetch origin",
+		basic: "basic commands"
 	},
 	{
 		name: "git remote rm [name]",

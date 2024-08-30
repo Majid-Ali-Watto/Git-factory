@@ -3,7 +3,21 @@ import autoTable from "jspdf-autotable";
 
 const download = (filteredCommands) => {
 	const doc = new jsPDF();
+	const pageCount = { count: 0 }; // To keep track of page count
 
+	// Function to add the footer to each page
+	const addFooter = () => {
+		const dev = "Developer and Author - Majid Ali";
+		const footerText = `Page No. ${pageCount.count} - ${dev}`;
+		const pageWidth = doc.internal.pageSize.width;
+		const textWidth = doc.getTextWidth(footerText);
+		const x = (pageWidth - textWidth) / 2;
+		const y = doc.internal.pageSize.height - 10;
+
+		doc.setFontSize(10);
+		doc.setFont("Helvetica", "normal");
+		doc.textWithLink(footerText, x+30, y, { url: "https://majidev.netlify.app/" });
+	};
 	// Header
 	const headerText = "Git Commands List";
 	doc.setFontSize(18);
@@ -43,13 +57,11 @@ const download = (filteredCommands) => {
 		margin: { right: 10 },
 		pageBreak: "auto",
 		didDrawPage: (data) => {
-			const dev = "Developer and Author - Majid Ali";
-			const footerText = `Page ${data.pageNumber} of ${data.pageCount}\t\t\t\t\t${dev}`;
-			doc.setFontSize(10);
-			doc.setFont("Helvetica", "normal");
-			doc.text(footerText, 14, doc.internal.pageSize.height - 10);
+			pageCount.count = data.pageNumber; // Set current page number
+			addFooter();
 		}
 	});
+
 	doc.save("git-commands.pdf");
 };
 
