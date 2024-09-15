@@ -43,6 +43,7 @@
 	},
 	"dependencies": {
 		"circle-loader": "^1.0.5",
+		"firebase": "^10.13.1",
 		"jspdf": "^2.5.1",
 		"jspdf-autotable": "^3.8.2",
 		"sweetalert2": "^11.12.4"
