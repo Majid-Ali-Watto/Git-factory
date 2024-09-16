@@ -9,12 +9,14 @@
 body {
   background-color: #f4f4f9;
   color: #333;
+}
 
+img {
+  mix-blend-mode: hard-light;
 }
 
 html {
   scroll-behavior: smooth;
-  /* Smooth scrolling */
 }
 
 .blog-container {
@@ -24,7 +26,7 @@ html {
 }
 
 .commands-list {
-  margin-bottom: 10px;
+  margin-bottom: clamp(0.8rem, 0.9rem, 1rem);
 }
 
 .search-container {
@@ -40,8 +42,9 @@ html {
   gap: 10px;
   padding: 10px;
   z-index: 1000;
-  /* Ensures the search container is above other content */
+
 }
+
 
 
 
@@ -49,30 +52,23 @@ html {
   .search-container {
     flex-direction: column;
     padding: 10px;
-    /* Ensure space for icon buttons */
   }
 
   .search-container input {
     width: 90%;
     margin-bottom: 10px;
-    /* Space between search input and icon buttons */
   }
 
   .selection-buttons {
     flex-direction: row;
-    /* Align buttons in a row */
     justify-content: space-between;
-    /* Space out buttons */
     width: 100%;
-    /* Full width for better alignment */
   }
 
   .header-icon {
     width: 20px;
-    /* Smaller size for smaller screens */
     height: 20px;
     margin: 0 5px;
-    /* Adjust spacing for smaller screens */
   }
 
 
@@ -111,47 +107,54 @@ input:focus {
 
 .command {
   position: relative;
-  /* Ensure the checkbox can be positioned absolutely within this container */
   margin-bottom: 20px;
   padding: 20px;
-  background-color: #ffffff;
+  /* background-color: whitesmoke; */
   border: 1px solid #e1e1e1;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .command:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 3px 2px rgba(0, 0, 0, 0.2), 0 -2px 3px 2px rgba(0, 0, 0, 0.2);
 }
 
 .command h2 {
   margin-top: 0;
-  font-size: 24px;
-  color: #333;
+  font-size: clamp(0.8rem, 1.4rem, 1.8rem);
+  /* color: #333; */
 }
 
 .command p {
-  margin: 10px 0;
+  /* margin: 10px 0; */
   line-height: 1.6;
   text-align: justify;
+  font-size: clamp(0.7rem, 0.9rem, 1.2rem);
 }
 
 .command pre {
   margin: 10px 0;
   padding: 10px;
-  background-color: #282c34;
+  background-color: lightblue;
   border-radius: 4px;
   position: relative;
 }
 
+.command pre:hover {
+  background-color: lightskyblue;
+
+  & code {
+    color: black;
+  }
+}
+
 .command code {
-  color: #f5f5f5;
+  /* color: #f5f5f5; */
+  color: #333;
   font-size: 14px;
   display: block;
   padding-right: 60px;
-  /* Ensure space for the button */
   overflow-x: auto;
 }
 
@@ -178,7 +181,15 @@ input:focus {
   top: 10px;
   right: 10px;
   transform: scale(1.2);
-  /* Optional: scale the checkbox for better visibility */
+}
+
+.checkbox:hover {
+  transform: scale(1.3);
+  outline: 1px solid green;
+}
+
+input[type='checkbox'] {
+  accent-color: lightgreen;
 }
 
 .copy-selected-button {
@@ -190,11 +201,8 @@ input:focus {
   cursor: pointer;
   font-size: 14px;
   display: block;
-  /* Ensure it's block level to center it easily */
   width: fit-content;
-  /* Adjust as needed */
-  margin-left: auto;
-  margin-right: auto;
+  margin-inline: auto;
 }
 
 .copy-selected-button:hover {
@@ -227,28 +235,21 @@ input:focus {
 
 .header-icon {
   width: 24px;
-  /* Adjust the size as needed */
   height: 24px;
   margin: 0 10px;
-  /* Adjust spacing between icons */
   cursor: pointer;
   vertical-align: middle;
-  /* Align icons with text */
   transition: opacity 0.3s ease;
 }
 
 .header-icon:hover {
   opacity: 0.7;
-  /* Slightly transparent on hover */
 }
 
 /* Ensure responsive layout */
 @media (max-width: 600px) {
   .header-icon {
-    /* width: 20px;
-    height: 20px; */
     margin: 0 5px;
-    /* Adjust spacing for smaller screens */
   }
 }
 
@@ -256,53 +257,23 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 15px;
+  padding: clamp(0.5rem, 0.8rem, 1rem);
   background-color: whitesmoke;
-  color: black;
   width: 100%;
   position: fixed;
   bottom: 0;
   left: 0;
   text-align: center;
-  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px -1px 1px rgba(0, 0, 0, 0.1);
 }
 
 footer h3 {
   margin: 0;
-  font-size: 16px;
-}
-/*
-.loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #1a1a1a;
-  z-index: 1000;
+  font-size: clamp(0.5rem, 1rem, 1.5rem);
+  color: #333;
 }
 
-.loading-spinner {
-  border-bottom: 8px solid rgba(0, 0, 0, 0.1);
-  border-top: 8px solid rgba(59, 59, 59, 0.1);
-  border-right: 8px solid rgba(255, 0, 0, 0.938);
-  border-left: 8px solid var(--spinner-color);
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
+a {
+  text-decoration: none;
+  color: #333;
 }
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-} */

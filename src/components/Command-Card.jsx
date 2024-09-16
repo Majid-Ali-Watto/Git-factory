@@ -36,10 +36,10 @@ const CommandCard = ({ command, onSelect, selected }) => {
 			/>
 			<h2>{command.name}</h2>
 			<p>
-				<strong>Description:</strong> {command.description}
+				{command.description}
 			</p>
 			<p>
-				<strong>Example:</strong> {command.example}
+				<strong>E.g.</strong> {command.example}
 			</p>
 			<div style={{ position: "relative" }}>
 				<pre>

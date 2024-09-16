@@ -42,9 +42,9 @@
 		"vite": "^5.0.0"
 	},
 	"dependencies": {
-		"circle-loader": "^1.0.5",
 		"jspdf": "^2.5.1",
 		"jspdf-autotable": "^3.8.2",
-		"sweetalert2": "^11.12.4"
+		"sweetalert2": "^11.12.4",
+		"vite-plugin-pwa": "^0.20.5"
 	}
 }

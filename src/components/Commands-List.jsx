@@ -3,7 +3,6 @@ import gitCommands from "../assets/commandsData.js";
 import CommandCard from "./Command-Card.jsx";
 import download from "../utils/download.js";
 import Swal from "sweetalert2";
-import { Loader } from "circle-loader";
 const options = {
 	position: "center",
 	icon: "success",
@@ -11,11 +10,28 @@ const options = {
 	showConfirmButton: false,
 	timer: 2000
 };
+const themeStatus = {
+	dark: {
+		bg: "#333",
+		text: "#f4f4f9"
+	},
+	light: {
+		bg: "#f4f4f9",
+		text: "#333"
+	}
+};
 const GitCommandsList = () => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [selectedCommands, setSelectedCommands] = useState([]);
 	const [showScrollTop, setShowScrollTop] = useState(false);
-
+	const [isDark, setIsDark] = useState(false);
+	function changeTheme(theme) {
+		console.log(theme);
+		setIsDark((prev) => !prev);
+		const body = document.getElementById("root");
+		body.style.backgroundColor = themeStatus[theme].bg;
+		body.style.color = themeStatus[theme].text;
+	}
 	const handleSearchChange = (event) => {
 		setSearchQuery(event.target.value);
 	};
@@ -52,7 +68,6 @@ const GitCommandsList = () => {
 	};
 
 	const filteredCommands = gitCommands.filter((command) => {
-		Loader.close();
 		const query = searchQuery.toLowerCase();
 		const { code, name, description, basic } = command;
 		return [name, description, code, basic].some((cmd) => cmd?.toLowerCase()?.includes(query));
@@ -118,6 +133,24 @@ const GitCommandsList = () => {
 							onClick={unselectAll}
 						/>
 					</abbr>
+					<abbr title="Change Theme">
+						{!isDark && (
+							<img
+								className="header-icon theme"
+								src="/dark.png"
+								alt="Theme"
+								onClick={() => changeTheme("dark")}
+							/>
+						)}
+						{isDark && (
+							<img
+								className="header-icon theme"
+								src="/light.png"
+								alt="Theme"
+								onClick={() => changeTheme("light")}
+							/>
+						)}
+					</abbr>
 				</div>
 			</header>
 
@@ -134,7 +167,14 @@ const GitCommandsList = () => {
 
 			<br />
 			<footer>
-				<h3>Developer and Author - Majid Ali</h3>
+				<h3>
+					Developer and Author -
+					<a
+						target="_blank"
+						href="https://majidev.netlify.app/">
+						Majid Ali
+					</a>
+				</h3>
 				{showScrollTop && (
 					<abbr title="Move to top">
 						<img
