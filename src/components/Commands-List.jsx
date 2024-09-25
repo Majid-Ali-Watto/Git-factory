@@ -92,95 +92,52 @@ const GitCommandsList = () => {
 	return (
 		<div className="blog-container">
 			<header className="search-container">
-				<input
-					type="search"
-					placeholder="Type `basic commands` Or Search commands..."
-					value={searchQuery}
-					onChange={handleSearchChange}
-				/>
+				<input type="search" placeholder="Type `basic commands` Or Search commands..." value={searchQuery} onChange={handleSearchChange} />
 				<div className="selection-buttons">
 					<abbr title="Download">
-						<img
-							src="/download.png"
-							alt="Download"
-							className="header-icon"
-							onClick={() => download(selectedCommands.length > 0 ? selectedCommands : filteredCommands)}
-						/>
+						<img src="/download.png" alt="Download" className="header-icon" onClick={() => download(selectedCommands.length > 0 ? selectedCommands : filteredCommands)} />
 					</abbr>
 					{selectedCommands.length >= 2 && (
 						<abbr title="Copy">
-							<img
-								src="/copy.png"
-								alt="Copy Selected"
-								className="header-icon"
-								onClick={copySelected}
-							/>
+							<img src="/copy.png" alt="Copy Selected" className="header-icon" onClick={copySelected} />
 						</abbr>
 					)}
 					<abbr title="Select All">
-						<img
-							src="/select.png"
-							alt="Select All"
-							className="header-icon"
-							onClick={selectAll}
-						/>
+						<img src="/select.png" alt="Select All" className="header-icon" onClick={selectAll} />
 					</abbr>
 					<abbr title="Unselect All">
-						<img
-							src="/delete.png"
-							alt="Unselect All"
-							className="header-icon"
-							onClick={unselectAll}
-						/>
+						<img src="/delete.png" alt="Unselect All" className="header-icon" onClick={unselectAll} />
 					</abbr>
 					<abbr title="Change Theme">
-						{!isDark && (
-							<img
-								className="header-icon theme"
-								src="/dark.png"
-								alt="Theme"
-								onClick={() => changeTheme("dark")}
-							/>
-						)}
-						{isDark && (
-							<img
-								className="header-icon theme"
-								src="/light.png"
-								alt="Theme"
-								onClick={() => changeTheme("light")}
-							/>
-						)}
+						{!isDark && <img className="header-icon theme" src="/dark.png" alt="Theme" onClick={() => changeTheme("dark")} />}
+						{isDark && <img className="header-icon theme" src="/light.png" alt="Theme" onClick={() => changeTheme("light")} />}
 					</abbr>
 				</div>
 			</header>
 
 			<div className="commands-list">
 				{filteredCommands.map((command, index) => (
-					<CommandCard
-						key={index}
-						command={command}
-						onSelect={handleSelect}
-						selected={selectedCommands.includes(command)}
-					/>
+					<CommandCard key={index} command={command} onSelect={handleSelect} selected={selectedCommands.includes(command)} />
 				))}
 			</div>
 
+			<div className="learnMore">
+				<span>If you want to learn more about Git,</span>
+				<a href="https://www.atlassian.com/git" target="_blank">
+					Click Here
+				</a>
+			</div>
 			<br />
 			<footer>
 				<h3>
 					Developer and Author -
-					<a
-						target="_blank"
-						href="https://majidev.netlify.app/">
+					<a target="_blank" href="https://majidev.netlify.app/">
 						Majid Ali
 					</a>
 				</h3>
 				{showScrollTop && (
 					<abbr title="Move to top">
-						<img
-							src="/top.png"
-							className="header-icon"
-							onClick={scrollToTop}></img>
+						<img src="/top.png" className="header-icon" onClick={scrollToTop}></img>
 					</abbr>
 				)}
 			</footer>

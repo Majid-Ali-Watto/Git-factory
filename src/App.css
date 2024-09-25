@@ -277,3 +277,15 @@ a {
   text-decoration: none;
   color: #333;
 }
+
+.learnMore {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.learnMore a {
+  color: #007bff !important;
+  cursor: pointer;
+  margin-left: 5px !important;
+}

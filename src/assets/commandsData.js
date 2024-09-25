@@ -14,19 +14,20 @@ const gitCommands = [
 		basic: "basic commands"
 	},
 	{
-		name: "git init",
-		description: "This command initializes a new Git repository in the current directory. It sets up the necessary files and directories for Git to start tracking changes in your project.",
-		example: "To start tracking changes in a new project, navigate to the project directory and run:",
-		code: "git init",
-		basic: "basic commands"
-	},
-	{
 		name: "git clone [url]",
 		description: "Clone a repository from a remote source to your local machine.",
 		example: "To clone a repository from GitHub, you can run:",
 		code: "git clone https://github.com/user/repository.git",
 		basic: "basic commands"
 	},
+	{
+		name: "git init",
+		description: "This command initializes a new Git repository in the current directory. It sets up the necessary files and directories for Git to start tracking changes in your project.",
+		example: "To start tracking changes in a new project, navigate to the project directory and run:",
+		code: "git init",
+		basic: "basic commands"
+	},
+
 	{
 		name: "git status",
 		description: "This command is used to check the status of your working directory and staging area. It shows you which files have been modified, which files are staged for commit, and which files are untracked by Git.",
@@ -176,19 +177,19 @@ const gitCommands = [
 		name: "git tag -d [tag_name]",
 		description: "Delete a tag from the local repository.",
 		example: 'To delete the tag named "v1.0", run:',
-		code: "git tag -d v1.0",
+		code: "git tag -d v1.0"
 	},
 	{
 		name: "git tag -l",
 		description: "List all tags in the repository.",
 		example: "To list all tags, run:",
-		code: "git tag -l",
+		code: "git tag -l"
 	},
 	{
 		name: "git show [tag_name]",
 		description: "Show detailed information about a specific tag.",
 		example: 'To show details about the tag named "v1.0", run:',
-		code: "git show v1.0",
+		code: "git show v1.0"
 	},
 	{
 		name: "git push origin [tag_name]",
@@ -201,7 +202,7 @@ const gitCommands = [
 		name: "git push --tags",
 		description: "Push all tags to the remote repository.",
 		example: "To push all local tags to the remote repository, run:",
-		code: "git push --tags",
+		code: "git push --tags"
 	},
 	{
 		name: "git rebase [branch]",
@@ -209,11 +210,12 @@ const gitCommands = [
 		example: 'To rebase the current branch onto the "master" branch, run:',
 		code: "git rebase master"
 	},
+
 	{
-		name: "git reset [file]",
-		description: "Unstage changes for a file.",
-		example: 'To unstage changes for a file named "index.html", run:',
-		code: "git reset index.html"
+		name: "git reset <file>",
+		description: "Unstage changes for the specified file while keeping the changes in the working directory.",
+		example: "To unstage changes for 'myfile.txt' without deleting the changes, run:",
+		code: "git reset myfile.txt"
 	},
 	{
 		name: "git checkout -- [file]",
@@ -240,10 +242,22 @@ const gitCommands = [
 		code: "git reset --soft abcd123"
 	},
 	{
+		name: "git reset --mixed <commit-hash>",
+		description: "Undo commits and unstage changes, but keep the working directory intact.",
+		example: "To reset the commit history up to 'abc123' and unstage the changes, run:",
+		code: "git reset --mixed abc123"
+	},
+	{
 		name: "git restore [file]",
 		description: "Restore changes in the working directory for a file to their state at the last commit.",
 		example: 'To restore changes in the working directory for a file named "index.html" to their state at the last commit, run:',
 		code: "git restore index.html"
+	},
+	{
+		name: "git restore --staged <file>",
+		description: "Unstage changes without altering the file in the working directory.",
+		example: "To unstage changes for 'myfile.txt', run:",
+		code: "git restore --staged myfile.txt"
 	},
 	{
 		name: "git stash pop",
@@ -406,7 +420,7 @@ const gitCommands = [
 	},
 	{
 		name: "git commit --amend",
-		description: "Amend the last commit with new changes.",
+		description: "Amend (to change or modify) the last commit with new changes.",
 		example: "To amend the last commit with new changes, run:",
 		code: "git commit --amend"
 	},
@@ -473,6 +487,19 @@ const gitCommands = [
 		example: 'To fetch and rebase instead of merging when pulling changes from the remote repository "origin", run:',
 		code: "git pull --rebase origin"
 	},
+	{
+		name: "git rebase --abort",
+		description: "Abort an ongoing rebase and return to the state before the rebase started.",
+		example: "If there are conflicts during a rebase and you want to abort, run:",
+		code: "git rebase --abort"
+	},
+	{
+		name: "git rebase --continue",
+		description: "Continue an ongoing rebase after resolving any conflicts.",
+		example: "After resolving conflicts, to continue the rebase process, run:",
+		code: "git rebase --continue"
+	},
+
 	{
 		name: "git remote rename [old_name] [new_name]",
 		description: "Rename a remote repository.",
