@@ -1,37 +1,23 @@
-import React, { useState, useEffect } from "react";
-import gitCommands from "../assets/commandsData.js";
-import CommandCard from "./Command-Card.jsx";
-import download from "../utils/download.js";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-const options = {
-	position: "center",
-	icon: "success",
-	title: "",
-	showConfirmButton: false,
-	timer: 2000
-};
-const themeStatus = {
-	dark: {
-		bg: "#333",
-		text: "#f4f4f9"
-	},
-	light: {
-		bg: "#f4f4f9",
-		text: "#333"
-	}
-};
+import gitCommands from "../assets/commandsData.js";
+import { options, themeStatus } from "../assets/themeAndOptions.js";
+import download from "../utils/download.js";
+import CommandCard from "./Command-Card.jsx";
+
 const GitCommandsList = () => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [selectedCommands, setSelectedCommands] = useState([]);
 	const [showScrollTop, setShowScrollTop] = useState(false);
 	const [isDark, setIsDark] = useState(false);
+
 	function changeTheme(theme) {
-		console.log(theme);
 		setIsDark((prev) => !prev);
 		const body = document.getElementById("root");
 		body.style.backgroundColor = themeStatus[theme].bg;
 		body.style.color = themeStatus[theme].text;
 	}
+
 	const handleSearchChange = (event) => {
 		setSearchQuery(event.target.value);
 	};
@@ -61,10 +47,18 @@ const GitCommandsList = () => {
 
 	const selectAll = () => {
 		setSelectedCommands(filteredCommands);
+		Swal.fire({
+			...options,
+			title: "All commands selected!"
+		});
 	};
 
 	const unselectAll = () => {
 		setSelectedCommands([]);
+		Swal.fire({
+			...options,
+			title: "All commands unselected!"
+		});
 	};
 
 	const filteredCommands = gitCommands.filter((command) => {

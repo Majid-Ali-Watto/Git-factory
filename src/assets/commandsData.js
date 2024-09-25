@@ -260,6 +260,12 @@ const gitCommands = [
 		code: "git restore --staged myfile.txt"
 	},
 	{
+		name: "git rm --cached -r <directory>",
+		description: "Remove a directory or file from the staging area (index) while keeping it in the working directory. This is often used when you want to stop tracking a file or directory in Git without deleting it from your local system.",
+		example: "To stop tracking the 'dev-dist/' directory but keep it in your working directory, run:",
+		code: "git rm --cached -r dev-dist/"
+	},
+	{
 		name: "git stash pop",
 		description: "Apply the most recent stash and remove it from the stash list.",
 		example: "To apply and remove the most recent stash, run:",
