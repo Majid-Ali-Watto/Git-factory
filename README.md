@@ -17,3 +17,5 @@ To set up and run the application locally, follow these steps:
    ```bash
    git clone https://github.com/Majid-Ali-Watto/Git-factory.git
    ```
+
+[View Git Factory Mobile Part](https://github.com/Majid-Ali-Watto/git-factory-react-native.git)
