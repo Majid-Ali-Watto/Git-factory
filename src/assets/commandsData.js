@@ -310,11 +310,18 @@ const gitCommands = [
 		code: "git remote rm origin"
 	},
 	{
-		name: "git branch -d [branch_name]",
-		description: "Delete the specified branch.",
-		example: 'To delete a branch named "feature", run:',
-		code: "git branch -d feature"
+		name: "git branch -d <branch-name>",
+		description: "Delete the specified branch only if it has been fully merged into your current branch or another branch. If the branch hasn't been merged, Git will refuse to delete it to prevent potential data loss.",
+		example: "To delete the 'test' branch only if it's merged, run:",
+		code: "git branch -d test"
 	},
+	{
+		name: "git branch -D <branch-name>",
+		description: "Forcefully delete the specified branch, even if it hasn't been fully merged into your current branch or any other branches. **Use with caution as this action cannot be undone easily.**",
+		example: "To forcefully delete the branch named 'test', run:",
+		code: "git branch -D test"
+	},
+
 	{
 		name: "git push [remote] --delete [branch_name]",
 		description: "Delete a branch on the remote repository.",
