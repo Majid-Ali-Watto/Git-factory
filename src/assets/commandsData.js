@@ -4,11 +4,6 @@ const gitCommands = [
 		description: "This command is used to set the name that will be associated with your commits in Git repositories. This name will appear in the metadata of your commits, identifying you as the author.",
 		example: "To set your username globally, run:",
 		code: 'git config --global user.name "Your Name"',
-		// details: {
-		// 	example: 'git config --global user.name "Majid Ali"',
-		// 	explaination: "This command will set your username of git as Majid Ali",
-		// 	img: "./git.png"
-		// },
 		basic: "basic commands"
 	},
 	{

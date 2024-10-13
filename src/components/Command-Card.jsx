@@ -1,32 +1,6 @@
-import React from "react";
-import Swal from "sweetalert2";
-// import showDetails from "./ShowCommandDetails";
-const options = {
-	position: "center",
-	icon: "success",
-	title: "",
-	showConfirmButton: false,
-	timer: 2000
-};
+import copyToClipboard from "../utils/copy-method";
+
 const CommandCard = ({ command, onSelect, selected }) => {
-	const copyToClipboard = (code) => {
-		navigator.clipboard
-			.writeText(code)
-			.then(() => {
-				Swal.fire({
-					...options,
-					title: "Code copied to clipboard!"
-				});
-			})
-			.catch(() => {
-				Swal.fire({
-					...options,
-					icon: "error",
-					title: "Failed to copy code."
-				});
-			});
-	};
-	// onClick={() => showDetails(command)}
 	return (
 		<div className="command">
 			<input type="checkbox" className="checkbox" checked={selected} onChange={() => onSelect(command)} />
@@ -39,7 +13,7 @@ const CommandCard = ({ command, onSelect, selected }) => {
 				<pre>
 					<code dangerouslySetInnerHTML={{ __html: command.code }} />
 				</pre>
-				<button className="copy-button" onClick={() => copyToClipboard(command.code)}>
+				<button className="copy-button" onClick={() => copyToClipboard(command.code, "Code copied to clipboard!", "Failed to copy code.")}>
 					Copy
 				</button>
 			</div>
