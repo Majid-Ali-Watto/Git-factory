@@ -1,5 +1,6 @@
 import React from "react";
 import Swal from "sweetalert2";
+// import showDetails from "./ShowCommandDetails";
 const options = {
 	position: "center",
 	icon: "success",
@@ -25,19 +26,12 @@ const CommandCard = ({ command, onSelect, selected }) => {
 				});
 			});
 	};
-
+	// onClick={() => showDetails(command)}
 	return (
 		<div className="command">
-			<input
-				type="checkbox"
-				className="checkbox"
-				checked={selected}
-				onChange={() => onSelect(command)}
-			/>
+			<input type="checkbox" className="checkbox" checked={selected} onChange={() => onSelect(command)} />
 			<h2>{command.name}</h2>
-			<p>
-				{command.description}
-			</p>
+			<p>{command.description}</p>
 			<p>
 				<strong>E.g.</strong> {command.example}
 			</p>
@@ -45,9 +39,7 @@ const CommandCard = ({ command, onSelect, selected }) => {
 				<pre>
 					<code dangerouslySetInnerHTML={{ __html: command.code }} />
 				</pre>
-				<button
-					className="copy-button"
-					onClick={() => copyToClipboard(command.code)}>
+				<button className="copy-button" onClick={() => copyToClipboard(command.code)}>
 					Copy
 				</button>
 			</div>

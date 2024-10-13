@@ -4,6 +4,11 @@ const gitCommands = [
 		description: "This command is used to set the name that will be associated with your commits in Git repositories. This name will appear in the metadata of your commits, identifying you as the author.",
 		example: "To set your username globally, run:",
 		code: 'git config --global user.name "Your Name"',
+		// details: {
+		// 	example: 'git config --global user.name "Majid Ali"',
+		// 	explaination: "This command will set your username of git as Majid Ali",
+		// 	img: "./git.png"
+		// },
 		basic: "basic commands"
 	},
 	{
@@ -15,9 +20,9 @@ const gitCommands = [
 	},
 	{
 		name: "git clone [url]",
-		description: "Clone a repository from a remote source to your local machine.",
-		example: "To clone a repository from GitHub, you can run:",
-		code: "git clone https://github.com/user/repository.git",
+		description: "Clone a repository from a remote source (github/gitlab) to your local machine.",
+		example: "To clone a repository Git-factory (repo) of Majid-Ali-Watto (owner) from GitHub, you can run:",
+		code: "git clone https://github.com/Majid-Ali-Watto/Git-factory.git",
 		basic: "basic commands"
 	},
 	{
@@ -38,7 +43,7 @@ const gitCommands = [
 	{
 		name: "git add [file]",
 		description: "This command adds changes in the working directory to the staging area. The staging area is a place where you can gather changes you want to include in your next commit. By using git add, you tell Git to include the changes made to a specific file (or files) in the next commit.",
-		example: 'To stage a file named "index.html" (git add . for all files) for the next commit, run:',
+		example: 'To stage a file named "index.html" ("git add ." for all files) for the next commit, run:',
 		code: `git add index.html\t\tOR\t\tgit add .`,
 		basic: "basic commands"
 	},
@@ -58,7 +63,7 @@ const gitCommands = [
 	},
 	{
 		name: "git push [remote] [branch]",
-		description: "Upload local repository content to a remote repository.",
+		description: "Upload local repository content to a remote repository (github/gitlab).",
 		example: 'To push changes from your local "master" branch to the remote "origin" repository, run:',
 		code: "git push origin master",
 		basic: "basic commands"
@@ -68,13 +73,13 @@ const gitCommands = [
 		name: "git pull [remote] [branch]",
 		description: "Fetch changes from a remote repository and merge them into the current branch.",
 		example: 'To fetch and merge changes from the remote "origin" repository into your local "master" branch, run:',
-		code: "git pull origin master",
+		code: "git pull origin master\t\tOR\t\tgit pull",
 		basic: "basic commands"
 	},
 	{
 		name: "git branch",
 		description: "List all branches in the repository.",
-		example: "To list all branches in the repository, run:",
+		example: "To see all branches in the repository and current selected branch, run:",
 		code: "git branch",
 		basic: "basic commands"
 	},
@@ -110,25 +115,25 @@ const gitCommands = [
 	{
 		name: "git remote add [name] [url]",
 		description: "Add a new remote repository.",
-		example: 'To add a remote repository named "origin" with URL "https://github.com/user/repository.git", run:',
-		code: "git remote add origin https://github.com/user/repository.git",
+		example: 'To add a remote repository named "origin" with URL "https://github.com/Majid-Ali-Watto/Git-factory.git", run:',
+		code: "git remote add origin https://github.com/Majid-Ali-Watto/Git-factory.git",
 		basic: "basic commands"
 	},
 	{
 		name: "git remote -v",
-		description: "List all remote repositories and their URLs.",
+		description: "List all remote repositories and their URLs. It will show remote origins where repository is connected for push and pull.",
 		example: "To list all remote repositories and their URLs, run:",
 		code: "git remote -v"
 	},
 	{
 		name: "git log",
-		description: "Display commit history.",
+		description: "Display commit history with author name, commit hash, date and commit message.",
 		example: "To display the commit history of the current branch, run:",
 		code: "git log"
 	},
 	{
 		name: "git show [commit]",
-		description: "Show changes introduced by a commit.",
+		description: "Show changes introduced by a commit. Display commit history with author name, commit hash, date and commit message. What was added or removed?",
 		example: 'To show changes introduced by a specific commit with hash "abcd123", run:',
 		code: "git show abcd123"
 	},
@@ -160,12 +165,38 @@ const gitCommands = [
 		code: `git stash apply stash@{0}\t\tOR\t\tgit stash apply`
 	},
 	{
+		name: "git stash pop",
+		description: "Apply the most recent stash and remove it from the stash list.",
+		example: "To apply and remove the most recent stash, run:",
+		code: "git stash pop",
+		basic: "basic commands"
+	},
+	{
+		name: "git stash list",
+		description: "List all stashed changes.",
+		example: "To list all stashed changes or to list only specific count of stashed changes,e.g. to list the last 3 stashes add -3, run:",
+		code: "git stash list\t\tOR\t\tgit stash list -3"
+	},
+	{
+		name: "git stash drop [stash]",
+		description: "Remove a specific stash.",
+		example: 'To remove a stash named "stash@{0}", run:',
+		code: "git stash drop stash@{0}"
+	},
+	{
+		name: "git stash clear",
+		description: "Remove all stashed changes.",
+		example: "To remove all stashed changes, run:",
+		code: "git stash clear"
+	},
+	{
 		name: "git tag [tag_name]",
 		description: "Create a lightweight tag pointing to the current commit.",
 		example: 'To create a tag named "v1.0" for the current commit, run:',
 		code: "git tag v1.0",
 		basic: "basic commands"
 	},
+
 	{
 		name: 'git tag -a [tag_name] -m "message"',
 		description: "Create an annotated tag with a descriptive message.",
@@ -205,10 +236,35 @@ const gitCommands = [
 		code: "git push --tags"
 	},
 	{
+		name: "git cherry-pick [commit1] [commit2] ...",
+		description: "The `git cherry-pick` command allows you to apply changes from one or more specific commits from another branch or location directly onto your current branch. This is useful when you want to integrate particular changes without merging an entire branch.",
+		example: "To apply the changes from commits 'abcd123' and 'efgh456' onto the current branch, run:",
+		code: "git cherry-pick abcd123 efgh456",
+		basic: "basic commands"
+	},
+	{
 		name: "git rebase [branch]",
-		description: "Incorporate changes from one branch into another by rewriting commit history.",
-		example: 'To rebase the current branch onto the "master" branch, run:',
+		description: "The `git rebase [branch]` command integrates changes from one branch into your current branch by replaying your commits on top of the specified branch. Unlike merging, rebasing rewrites the commit history, creating a cleaner, linear history without merge commits.",
+		example: "To rebase the current branch onto the 'master' branch, applying your commits on top of 'master', run:",
 		code: "git rebase master"
+	},
+	{
+		name: "git pull --rebase",
+		description: "The `git pull --rebase` command fetches changes from the remote repository and rebases your current branch on top of the fetched commits instead of merging. This avoids unnecessary merge commits and keeps your project history linear and clean.",
+		example: "To fetch and rebase the changes from the remote repository 'origin' instead of merging them, run:",
+		code: "git pull --rebase origin"
+	},
+	{
+		name: "git rebase --abort",
+		description: "The `git rebase --abort` command stops an ongoing rebase process and returns your repository to the exact state it was in before the rebase began. This is helpful if you encounter conflicts or issues and decide not to continue with the rebase.",
+		example: "If conflicts arise during a rebase and you want to cancel it, run:",
+		code: "git rebase --abort"
+	},
+	{
+		name: "git rebase --continue",
+		description: "The `git rebase --continue` command is used to resume an ongoing rebase after you have resolved any conflicts. It tells Git that the conflicts have been fixed and it can proceed with applying the rest of the commits.",
+		example: "After resolving any conflicts during a rebase, to continue the rebase process, run:",
+		code: "git rebase --continue"
 	},
 
 	{
@@ -219,10 +275,11 @@ const gitCommands = [
 	},
 	{
 		name: "git checkout -- [file]",
-		description: "Discard changes in the working directory for a file.",
-		example: 'To discard changes in the working directory for a file named "index.html", run:',
-		code: "git checkout -- index.html"
+		description: "The `git checkout -- [file]` command discards any local changes made to a specific file in your working directory, reverting it back to the last committed state. This is useful if you want to undo modifications to a file and return it to how it was in the last commit.",
+		example: "To discard changes made to a file named 'index.html' and restore it to the version in the last commit, run:",
+		code: "git checkout -- index.html\t\tOR\t\tgit checkout -- src/App.jsx"
 	},
+
 	{
 		name: "git revert [commit]",
 		description: "Reverse a commit by creating a new commit.",
@@ -265,31 +322,7 @@ const gitCommands = [
 		example: "To stop tracking the 'dev-dist/' directory but keep it in your working directory, run:",
 		code: "git rm --cached -r dev-dist/"
 	},
-	{
-		name: "git stash pop",
-		description: "Apply the most recent stash and remove it from the stash list.",
-		example: "To apply and remove the most recent stash, run:",
-		code: "git stash pop",
-		basic: "basic commands"
-	},
-	{
-		name: "git stash list",
-		description: "List all stashed changes.",
-		example: "To list all stashed changes, run:",
-		code: "git stash list"
-	},
-	{
-		name: "git stash drop [stash]",
-		description: "Remove a specific stash.",
-		example: 'To remove a stash named "stash@{0}", run:',
-		code: "git stash drop stash@{0}"
-	},
-	{
-		name: "git stash clear",
-		description: "Remove all stashed changes.",
-		example: "To remove all stashed changes, run:",
-		code: "git stash clear"
-	},
+
 	{
 		name: "git gc",
 		description: "Cleanup unnecessary files and optimize the local repository.",
@@ -438,11 +471,19 @@ const gitCommands = [
 		code: "git commit --amend"
 	},
 	{
-		name: "git branch -m [old_branch_name] [new_branch_name]",
-		description: "Rename a branch locally.",
-		example: 'To rename a branch named "feature" to "new-feature", run:',
-		code: "git branch -m feature new-feature"
+		name: "git branch -M main",
+		description: "The `git branch -M main` command renames the current branch to 'main', using the `-M` flag to force the rename. This is useful for changing the default branch name, especially in scenarios where you want to adopt 'main' as the primary branch instead of 'master'. If a branch named 'main' already exists, it will be overwritten.",
+		example: "To rename the current branch to 'main', run:",
+		code: "git branch -M main"
 	},
+
+	{
+		name: "git branch -m [old_branch] [new_branch]",
+		description: "The `git branch -m` command renames an existing branch in your Git repository. If you provide only one argument, it renames the current branch to the specified name. This command is useful for improving branch naming conventions or correcting naming mistakes without affecting your commit history.",
+		example: "To rename the branch 'feature-xyz' to 'feature-abc', run:\n\n1. For renaming the current branch:\n   `git branch -m feature-abc`\n\n2. For renaming a specific branch:\n   `git branch -m feature-xyz feature-abc`",
+		code: "git branch -m feature-xyz feature-abc"
+	},
+
 	{
 		name: "git reflog",
 		description: "Show a log of all commits that have been referenced in your local repository.",
@@ -487,31 +528,6 @@ const gitCommands = [
 		example: 'To create a zip archive of the "master" branch named "repo.zip", run:',
 		code: "git archive master --format=zip --output=repo.zip"
 	},
-	{
-		name: "git submodule update --init --recursive",
-		description: "Initialize and update submodules in the repository.",
-		example: "To initialize and update submodules in the repository, run:",
-		code: "git submodule update --init --recursive"
-	},
-
-	{
-		name: "git pull --rebase",
-		description: "Fetch and rebase instead of merging when pulling changes from a remote repository.",
-		example: 'To fetch and rebase instead of merging when pulling changes from the remote repository "origin", run:',
-		code: "git pull --rebase origin"
-	},
-	{
-		name: "git rebase --abort",
-		description: "Abort an ongoing rebase and return to the state before the rebase started.",
-		example: "If there are conflicts during a rebase and you want to abort, run:",
-		code: "git rebase --abort"
-	},
-	{
-		name: "git rebase --continue",
-		description: "Continue an ongoing rebase after resolving any conflicts.",
-		example: "After resolving conflicts, to continue the rebase process, run:",
-		code: "git rebase --continue"
-	},
 
 	{
 		name: "git remote rename [old_name] [new_name]",
@@ -521,22 +537,71 @@ const gitCommands = [
 	},
 	{
 		name: "git remote set-url [remote_name] [new_url]",
-		description: "Change the URL of a remote repository.",
+		description: "This command allows you to change the URL of a remote repository in your Git configuration. This is useful when the repository’s URL has changed, or you want to switch between HTTPS and SSH URLs for the remote.",
 		example: 'To change the URL of the remote repository named "origin", run:',
 		code: "git remote set-url origin <new_url>"
 	},
 
 	{
-		name: "git cherry-pick [commit1] [commit2] ...",
-		description: "Apply the changes introduced by specific commits to the current branch.",
-		example: 'To apply the changes introduced by commits "abcd123" and "efgh456" to the current branch, run:',
-		code: "git cherry-pick abcd123 efgh456"
-	},
-	{
 		name: "git bisect",
 		description: "Use binary search to find the commit that introduced a bug.",
 		example: "To use binary search to find the commit that introduced a bug, run:",
 		code: "git bisect"
+	},
+	{
+		name: "git submodule add [repository_url] [path]",
+		description: "Adds a new submodule to the current repository. This allows you to include an external Git repository inside your project, which can be tracked separately. The submodule will be added at the specified path.",
+		example: "To add a submodule from a repository and place it in a specific path, run:",
+		code: "git submodule add https://github.com/user/repo.git path/to/submodule"
+	},
+	{
+		name: "git submodule init",
+		description: "Initializes the submodules that have been defined in the .gitmodules file but are not yet set up in the local repository. It prepares the submodule configuration so that they can be fetched or updated later.",
+		example: "To initialize all submodules that are declared in the .gitmodules file, run:",
+		code: "git submodule init"
+	},
+	{
+		name: "git submodule update",
+		description: "Fetches the latest commits for all initialized submodules and checks them out in the working directory. This command ensures that the submodules are updated to match the versions specified in the main project.",
+		example: "To fetch and check out the latest changes for all submodules, run:",
+		code: "git submodule update"
+	},
+	{
+		name: "git submodule update -f --init megaset",
+		description: "Forces the update of a specific submodule (megaset) by fetching the submodule's latest content and initializing it if it hasn't been initialized yet. The `-f` option forces the update, and `--init` ensures the submodule is initialized if it hasn't been already. This command is useful if you want to ensure a submodule is fetched and checked out even in the case of conflicts or missing initialization.",
+		example: "To force the update and initialization of the submodule named `megaset`, run:",
+		code: "git submodule update -f --init megaset"
+	},
+
+	{
+		name: "git submodule foreach [command]",
+		description: "Executes a specified command in each of the submodule directories. This is useful for performing the same action (like pulling updates) across all submodules.",
+		example: "To run `git pull` in all submodules, run:",
+		code: "git submodule foreach git pull"
+	},
+	{
+		name: "git submodule deinit [path]",
+		description: "Deinitializes a submodule, removing it from the working directory but keeping its configuration in the .gitmodules file. This does not delete the submodule from the repository, but removes its files locally.",
+		example: "To deinitialize a submodule at a specific path, run:",
+		code: "git submodule deinit path/to/submodule"
+	},
+	{
+		name: "git submodule status",
+		description: "Displays the current status of each submodule in the repository, showing which commit each submodule is checked out at, whether there are uncommitted changes, and more.",
+		example: "To check the current status of all submodules, run:",
+		code: "git submodule status"
+	},
+	{
+		name: "git submodule sync",
+		description: "Updates the URL of submodules in the .git/config file to match those defined in the .gitmodules file. This is useful if the URL of a submodule has changed and you want to synchronize it with the latest configuration.",
+		example: "To synchronize the URLs of all submodules, run:",
+		code: "git submodule sync"
+	},
+	{
+		name: "git submodule remove [path]",
+		description: "Completely removes a submodule from the repository. This process involves deinitializing the submodule, removing the submodule entry from the .gitmodules file, and deleting the submodule's directory and related metadata.",
+		example: "To remove a submodule from the repository entirely, run:",
+		code: "git submodule deinit -f -- path/to/submodule\ngit rm -f path/to/submodule\nrm -rf .git/modules/path/to/submodule"
 	}
 ];
 

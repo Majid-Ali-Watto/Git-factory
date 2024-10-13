@@ -8,12 +8,16 @@ const options = {
 
 const themeStatus = {
 	dark: {
-		bg: "#333",
-		text: "#f4f4f9"
+		// bg: "#333",
+		bg: "black",
+		// text: "#f4f4f9"
+		text: "white"
 	},
 	light: {
-		bg: "#f4f4f9",
-		text: "#333"
+		// bg: "#f4f4f9",
+		bg: "white",
+		// text: "#333"
+		text: "black"
 	}
 };
 export { themeStatus, options };

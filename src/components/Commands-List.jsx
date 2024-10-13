@@ -4,6 +4,7 @@ import gitCommands from "../assets/commandsData.js";
 import { options, themeStatus } from "../assets/themeAndOptions.js";
 import download from "../utils/download.js";
 import CommandCard from "./Command-Card.jsx";
+import showArea from "../utils/gitFirstTimeGuide.js";
 
 const GitCommandsList = () => {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -13,9 +14,9 @@ const GitCommandsList = () => {
 
 	function changeTheme(theme) {
 		setIsDark((prev) => !prev);
-		const body = document.getElementById("root");
-		body.style.backgroundColor = themeStatus[theme].bg;
-		body.style.color = themeStatus[theme].text;
+		const root = document.getElementById("root");
+		root.style.backgroundColor = themeStatus[theme].bg;
+		root.style.color = themeStatus[theme].text;
 	}
 
 	const handleSearchChange = (event) => {
@@ -99,16 +100,26 @@ const GitCommandsList = () => {
 					<abbr title="Select All">
 						<img src="/select.png" alt="Select All" className="header-icon" onClick={selectAll} />
 					</abbr>
-					<abbr title="Unselect All">
-						<img src="/delete.png" alt="Unselect All" className="header-icon" onClick={unselectAll} />
-					</abbr>
+					{selectedCommands.length >= 2 && (
+						<abbr title="Unselect All">
+							<img src="/delete.png" alt="Unselect All" className="header-icon" onClick={unselectAll} />
+						</abbr>
+					)}
 					<abbr title="Change Theme">
 						{!isDark && <img className="header-icon theme" src="/dark.png" alt="Theme" onClick={() => changeTheme("dark")} />}
 						{isDark && <img className="header-icon theme" src="/light.png" alt="Theme" onClick={() => changeTheme("light")} />}
 					</abbr>
 				</div>
 			</header>
-
+			<div>
+				<ul>
+					<li className="must-read">
+						<strong onClick={showArea}>Must Read </strong>
+						<h5>Guide to Push for first time</h5>
+					</li>
+				</ul>
+			</div>
+			<br />
 			<div className="commands-list">
 				{filteredCommands.map((command, index) => (
 					<CommandCard key={index} command={command} onSelect={handleSelect} selected={selectedCommands.includes(command)} />
