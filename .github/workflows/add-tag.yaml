@@ -90,7 +90,7 @@ jobs:
 
       # Step 7: Push the committed changes back to the 'latest-ui' branch.
       - name: Push changes
-        run: git push origin latest-ui
+        run: git push origin main
 
       # Step 8: Create a new Git tag with the updated version number.
       # This step tags the commit with the new version and pushes the tag to the repository.
