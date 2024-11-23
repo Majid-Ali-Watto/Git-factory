@@ -1,6 +1,6 @@
 {
   "name": "git-guide",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "description": "This app provides a comprehensive list of Git commands along with descriptions, examples, and usage instructions.",
   "scripts": {
