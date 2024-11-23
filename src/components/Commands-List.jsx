@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import CommandCard from "./Command-Card.jsx";
 import Footer from "./footer.jsx";
 import MustRead from "./must-read.jsx";
@@ -9,6 +9,8 @@ const GitCommandsList = () => {
 	const [selectedCommands, setSelectedCommands] = useState([]);
 	const [showScrollTop, setShowScrollTop] = useState(false);
 	const [filteredCommands, setFilteredCommands] = useState([]);
+	const commandsListRef = useRef();
+	const commandsListHTMLRef = useRef();
 
 	const handleSelect = (command) => {
 		setSelectedCommands((prevSelected) => (prevSelected.includes(command) ? prevSelected.filter((c) => c !== command) : [...prevSelected, command]));
@@ -28,17 +30,19 @@ const GitCommandsList = () => {
 
 	return (
 		<div className="blog-container">
-			<Header setFilteredCommands={setFilteredCommands} filteredCommands={filteredCommands} selectedCommands={selectedCommands} setSelectedCommands={setSelectedCommands} />
+			<Header commandsListHTMLRef={commandsListHTMLRef} commandsListRef={commandsListRef} setFilteredCommands={setFilteredCommands} filteredCommands={filteredCommands} selectedCommands={selectedCommands} setSelectedCommands={setSelectedCommands} />
 			<MustRead />
 			<br />
-			<div className="commands-list">
-				{filteredCommands.map((command, index) => (
-					<CommandCard key={index} command={command} onSelect={handleSelect} selected={selectedCommands.includes(command)} />
-				))}
+			<div ref={commandsListHTMLRef}>
+				<div className="commands-list" ref={commandsListRef}>
+					{filteredCommands.map((command, index) => (
+						<CommandCard key={index} command={command} onSelect={handleSelect} selected={selectedCommands.includes(command)} />
+					))}
+				</div>
+				<LearnMoreLinks />
+				<br />
+				<Footer showScrollTop={showScrollTop} />
 			</div>
-			<LearnMoreLinks />
-			<br />
-			<Footer showScrollTop={showScrollTop} />
 		</div>
 	);
 };

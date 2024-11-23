@@ -11,19 +11,32 @@ function showArea() {
                         <meta name="viewport" content="width=device-width, initial-scale=1.0">
                         <title>First Time Push to Git</title>
                         <style>
-
+                            body {
+                                font-size: 16px;
+                                line-height: 1.6;
+                            }
                             h1, h2 {
                                 color: #333;
+                                font-size: 1.8rem;
+                            }
+                            h3 {
+                                font-size: 1.4rem;
+                            }
+                            p, li {
+                                font-size: 1rem;
+                            }
+                            code {
+                                font-size: 0.9rem;
                             }
                             ol {
                                 margin-left: 20px;
                             }
-                            pre,code{
-                                color:white;
+                            pre, code {
+                                color: #333;
                             }
                             code {
-                                background-color: #333;
-                                padding: 2px 4px;
+                                background-color: #f4f4f4;
+                                padding: 3px 4px;
                                 border-radius: 3px;
                             }
                             pre {
@@ -32,14 +45,48 @@ function showArea() {
                                 border-radius: 5px;
                                 overflow-x: auto;
                             }
-                            li,h3,p{
+                            li, h3, p {
                                 margin-bottom: 10px;
                                 text-align: left;
                             }
-                            li,p{
+                            li, p {
                                 margin-left: 20px;
                             }
-
+                            /* Responsive font sizes */
+                            @media (max-width: 768px) {
+                                body {
+                                    font-size: 14px;
+                                }
+                                h1, h2 {
+                                    font-size: 1.6rem;
+                                }
+                                h3 {
+                                    font-size: 1.2rem;
+                                }
+                                p, li {
+                                    font-size: 0.9rem;
+                                }
+                                code {
+                                    font-size: 0.8rem;
+                                }
+                            }
+                            @media (max-width: 480px) {
+                                body {
+                                    font-size: 12px;
+                                }
+                                h1, h2 {
+                                    font-size: 1.4rem;
+                                }
+                                h3 {
+                                    font-size: 1rem;
+                                }
+                                p, li {
+                                    font-size: 0.8rem;
+                                }
+                                code {
+                                    font-size: 0.7rem;
+                                }
+                            }
                         </style>
                     </head>
                     <body>
@@ -89,7 +136,7 @@ function showArea() {
                     </body>
                 </html>`,
 
-		focusConfirm: true
+		focusConfirm: true,
 	});
 }
 

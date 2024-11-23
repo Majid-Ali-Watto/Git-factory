@@ -41,6 +41,7 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 10px;
   padding: 10px;
   z-index: 1000;
@@ -80,6 +81,7 @@ h5 {
 }
 
 @media screen and (max-width: 420px) {
+
   .search-container {
     flex-direction: column;
     padding: 10px;
@@ -329,5 +331,85 @@ a {
 @media screen and (max-width: 1080px) {
   .swal2-popup {
     width: 100%;
+  }
+}
+
+
+.select-dropdown {
+  display: inline-block;
+  padding: 4px;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: white;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hamburger-menu div {
+  width: 5px;
+  height: 5px;
+  background-color: #333;
+  border-radius: 50%;
+}
+
+/* Styles for the dropdown inside hamburger */
+.menu-options {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  position: absolute;
+  top: 45px;
+  right: 10px;
+  width: 150px;
+}
+
+.menu-options label {
+  font-size: 14px;
+  padding: 5px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-options input[type="radio"] {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.menu-options input[type="radio"]:checked+span {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.menu-options label:hover {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .select-dropdown {
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: flex;
+  }
+}
+
+@media (max-width: 420px) {
+  .menu-options {
+    top: 90px;
   }
 }
