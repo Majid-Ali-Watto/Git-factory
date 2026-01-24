@@ -1,5 +1,4 @@
 import localAlert from "./local-alert";
-
 function showArea() {
   localAlert.fire({
     title: "First Time Push to Git",
