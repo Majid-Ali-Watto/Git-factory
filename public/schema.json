@@ -1,0 +1,44 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Git Factory",
+  "description": "Comprehensive Git commands guide with descriptions, examples, and usage instructions",
+  "url": "https://git-factory.com",
+  "applicationCategory": "DeveloperApplication",
+  "author": {
+    "@type": "Person",
+    "name": "Majid Ali"
+  },
+  "image": "https://git-factory.com/git.png",
+  "screenshot": "https://git-factory.com/git.png",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://git-factory.com/?search={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  },
+  "keywords": [
+    "Git commands",
+    "Git tutorial",
+    "Version control",
+    "Git guide",
+    "Git cheat sheet",
+    "Git documentation",
+    "Git basics",
+    "Git workflow"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "100",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}

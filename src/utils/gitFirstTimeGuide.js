@@ -1,9 +1,9 @@
-import Swal from "sweetalert2";
+import localAlert from "./local-alert";
 
 function showArea() {
-	Swal.fire({
-		title: "First Time Push to Git",
-		html: `
+  localAlert.fire({
+    title: "First Time Push to Git",
+    html: `
 				<!DOCTYPE html>
                 <html lang="en">
                     <head>
@@ -136,8 +136,9 @@ function showArea() {
                     </body>
                 </html>`,
 
-		focusConfirm: true,
-	});
+    focusConfirm: true,
+    showConfirmButton: true,
+  });
 }
 
 export default showArea;

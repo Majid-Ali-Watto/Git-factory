@@ -1,603 +1,1443 @@
 const gitCommands = [
-	{
-		name: 'git config --global user.name "Your Name"',
-		description: "This command is used to set the name that will be associated with your commits in Git repositories. This name will appear in the metadata of your commits, identifying you as the author.",
-		example: "To set your username globally, run:",
-		code: 'git config --global user.name "Your Name"',
-		basic: "basic commands"
-	},
-	{
-		name: 'git config --global user.email "your_email@example.com"',
-		description: " This command sets the email address that will be associated with your commits globally. This email address will appear in the metadata of your commits, identifying you as the author.",
-		example: "To set your email globally, run:",
-		code: 'git config --global user.email "your_email@example.com"',
-		basic: "basic commands"
-	},
-	{
-		name: "git clone [url]",
-		description: "Clone a repository from a remote source (github/gitlab) to your local machine.",
-		example: "To clone a repository Git-factory (repo) of Majid-Ali-Watto (owner) from GitHub, you can run:",
-		code: "git clone https://github.com/Majid-Ali-Watto/Git-factory.git",
-		basic: "basic commands"
-	},
-	{
-		name: "git init",
-		description: "This command initializes a new Git repository in the current directory. It sets up the necessary files and directories for Git to start tracking changes in your project.",
-		example: "To start tracking changes in a new project, navigate to the project directory and run:",
-		code: "git init",
-		basic: "basic commands"
-	},
+  // Configuration Commands
+  {
+    name: 'git config --global user.name "Your Name"',
+    description:
+      "Sets the author name for all your commits globally. This name identifies you across all repositories on your machine and appears in every commit's metadata.",
+    example: "To set your username globally, run:",
+    code: 'git config --global user.name "John Doe"',
+    basic: "basic commands",
+    category: "Configuration",
+    difficulty: "beginner",
+  },
+  {
+    name: 'git config --global user.email "your_email@example.com"',
+    description:
+      "Sets the email address for all your commits globally. Essential for identifying the committer and appears alongside your name in all commits.",
+    example: "To set your email globally, run:",
+    code: 'git config --global user.email "john@example.com"',
+    basic: "basic commands",
+    category: "Configuration",
+    difficulty: "beginner",
+  },
+  {
+    name: "git config --list",
+    description:
+      "Displays all Git configuration settings from both global (~/.gitconfig) and repository-specific (.git/config) files. Useful for verifying your setup.",
+    example: "To view all configuration settings, run:",
+    code: "git config --list",
+    category: "Configuration",
+    difficulty: "beginner",
+  },
+  {
+    name: 'git config --local user.name "Your Name"',
+    description:
+      "Sets the author name for only the current repository, overriding global settings. Useful when working on different projects with different identities.",
+    example: "To set a local username for this repository only, run:",
+    code: 'git config --local user.name "Work Name"',
+    category: "Configuration",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git config core.editor [editor]",
+    description:
+      "Sets the default text editor for Git (used when writing commit messages). Examples: vim, nano, code, gedit.",
+    example: "To set VS Code as your editor, run:",
+    code: 'git config --global core.editor "code --wait"',
+    category: "Configuration",
+    difficulty: "intermediate",
+  },
 
-	{
-		name: "git status",
-		description: "This command is used to check the status of your working directory and staging area. It shows you which files have been modified, which files are staged for commit, and which files are untracked by Git.",
-		example: "To see which files have been modified since your last commit, run:",
-		code: "git status",
-		basic: "basic commands"
-	},
-	{
-		name: "git add [file]",
-		description: "This command adds changes in the working directory to the staging area. The staging area is a place where you can gather changes you want to include in your next commit. By using git add, you tell Git to include the changes made to a specific file (or files) in the next commit.",
-		example: 'To stage a file named "index.html" ("git add ." for all files) for the next commit, run:',
-		code: `git add index.html\t\tOR\t\tgit add .`,
-		basic: "basic commands"
-	},
-	{
-		name: 'git commit -m "Commit message"',
-		description: " This command records the changes that have been staged in the repository with a descriptive message. The commit message should summarize the changes made in the commit, providing context and information about the purpose of the changes.",
-		example: 'To commit staged changes with the message "Add new feature", run:',
-		code: 'git commit -m "Add new feature"',
-		basic: "basic commands"
-	},
-	{
-		name: "git push -u origin [branch]",
-		description: "Push the specified branch to the remote repository and set it as the upstream branch. It is needed for first time, after pushing at least once, upstream is not needed.",
-		example: 'To push the local branch named "feature" to the remote repository named "origin" and set it as the upstream branch, run:',
-		code: "git push -u origin feature",
-		basic: "basic commands"
-	},
-	{
-		name: "git push [remote] [branch]",
-		description: "Upload local repository content to a remote repository (github/gitlab).",
-		example: 'To push changes from your local "master" branch to the remote "origin" repository, run:',
-		code: "git push origin master",
-		basic: "basic commands"
-	},
+  // Repository Commands
+  {
+    name: "git clone [url]",
+    description:
+      "Creates a complete local copy of a remote repository. Downloads all commits, branches, and history from the remote source (GitHub, GitLab, Bitbucket, etc.).",
+    example: "To clone a repository from GitHub, run:",
+    code: "git clone https://github.com/Majid-Ali-Watto/Git-factory.git",
+    basic: "basic commands",
+    category: "Repository",
+    difficulty: "beginner",
+  },
+  {
+    name: "git clone [url] [directory]",
+    description:
+      "Clones a repository into a custom directory with a name of your choice instead of using the repository's default name.",
+    example: "To clone into a folder named 'my-project', run:",
+    code: "git clone https://github.com/user/repo.git my-project",
+    category: "Repository",
+    difficulty: "beginner",
+  },
+  {
+    name: "git clone --depth 1 [url]",
+    description:
+      "Creates a shallow clone with only the latest commit history. Much faster and smaller download, useful when you don't need full history.",
+    example: "To do a shallow clone, run:",
+    code: "git clone --depth 1 https://github.com/user/repo.git",
+    category: "Repository",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git clone --mirror [url]",
+    description:
+      "Creates a bare mirror of a repository (no working directory). Used for backing up or duplicating repositories.",
+    example: "To create a mirror clone, run:",
+    code: "git clone --mirror https://github.com/user/repo.git repo.git",
+    category: "Repository",
+    difficulty: "advanced",
+  },
+  {
+    name: "git init",
+    description:
+      "Initializes a new Git repository in the current directory. Creates the necessary .git folder and metadata to start tracking project changes.",
+    example: "To initialize a new repository, run:",
+    code: "git init",
+    basic: "basic commands",
+    category: "Repository",
+    difficulty: "beginner",
+  },
+  {
+    name: "git init [directory]",
+    description:
+      "Creates a new Git repository in a specified directory and initializes it with Git's internal structure.",
+    example: "To initialize a repository in a new folder, run:",
+    code: "git init my-project",
+    category: "Repository",
+    difficulty: "beginner",
+  },
 
-	{
-		name: "git pull [remote] [branch]",
-		description: "Fetch changes from a remote repository and merge them into the current branch.",
-		example: 'To fetch and merge changes from the remote "origin" repository into your local "master" branch, run:',
-		code: "git pull origin master\t\tOR\t\tgit pull",
-		basic: "basic commands"
-	},
-	{
-		name: "git branch",
-		description: "List all branches in the repository.",
-		example: "To see all branches in the repository and current selected branch, run:",
-		code: "git branch",
-		basic: "basic commands"
-	},
-	{
-		name: "git checkout [branch_name]",
-		description: "Switch to the specified branch.",
-		example: 'To switch to a branch named "feature", run:',
-		code: "git checkout feature",
-		basic: "basic commands"
-	},
-	{
-		name: "git checkout -b [branch]",
-		description: "Create a new branch and switch to it.",
-		example: 'To create a new branch named "feature" and switch to it, run:',
-		code: "git checkout -b feature",
-		basic: "basic commands"
-	},
-	{
-		name: "git switch [branch_name]",
-		description: "Switch to the specified branch.",
-		example: 'To switch to a branch named "feature", run:',
-		code: "git switch feature",
-		basic: "basic commands"
-	},
+  // Staging & Committing
+  {
+    name: "git status",
+    description:
+      "Shows the current state of your working directory and staging area. Displays modified, staged, and untracked files with helpful next-step suggestions.",
+    example: "To check your repository status, run:",
+    code: "git status",
+    basic: "basic commands",
+    category: "Staging & Committing",
+    difficulty: "beginner",
+  },
+  {
+    name: "git status -s",
+    description:
+      "Short format of git status. Shows file state using abbreviations (M=modified, A=added, D=deleted, etc.) for a compact view.",
+    example: "To see status in short format, run:",
+    code: "git status -s",
+    category: "Staging & Committing",
+    difficulty: "beginner",
+  },
+  {
+    name: "git status --porcelain",
+    description:
+      "Machine-readable status output. Designed for scripts and automation tools that need to parse repository state programmatically.",
+    example: "To get status for scripting, run:",
+    code: "git status --porcelain",
+    category: "Staging & Committing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git add [file]",
+    description:
+      "Stages changes to a specific file for the next commit. Tells Git to include this file in your next commit snapshot.",
+    example: "To stage a specific file, run:",
+    code: "git add index.html",
+    basic: "basic commands",
+    category: "Staging & Committing",
+    difficulty: "beginner",
+  },
+  {
+    name: "git add .",
+    description:
+      "Stages all modified and new files in the current directory and subdirectories. Quick way to stage everything you've changed.",
+    example: "To stage all changes in the repository, run:",
+    code: "git add .",
+    basic: "basic commands",
+    category: "Staging & Committing",
+    difficulty: "beginner",
+  },
+  {
+    name: "git add -A",
+    description:
+      "Stages all changes globally: modified, new, and deleted files across the entire repository. Different from 'git add .' which doesn't include deletions.",
+    example: "To stage everything including deletions, run:",
+    code: "git add -A",
+    category: "Staging & Committing",
+    difficulty: "beginner",
+  },
+  {
+    name: "git add -p",
+    description:
+      "Interactive staging mode - review your changes hunk by hunk and choose which ones to stage. Great for crafting clean commits with only related changes.",
+    example: "To stage interactively by hunks, run:",
+    code: "git add -p",
+    category: "Staging & Committing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git add -u",
+    description:
+      "Stages only modified and deleted files - not new untracked files. Useful when you've changed existing files but added nothing new.",
+    example: "To stage only tracked file changes, run:",
+    code: "git add -u",
+    category: "Staging & Committing",
+    difficulty: "intermediate",
+  },
+  {
+    name: 'git commit -m "Commit message"',
+    description:
+      "Records staged changes to the repository with a descriptive message. The message should summarize what changed and why - keep it clear and concise.",
+    example: "To commit with a message, run:",
+    code: 'git commit -m "Fix: Resolve login form validation bug"',
+    basic: "basic commands",
+    category: "Staging & Committing",
+    difficulty: "beginner",
+  },
+  {
+    name: 'git commit -m "Title" -m "Description"',
+    description:
+      "Creates a commit with both a title and detailed description. First message is the short title, second provides context and explanation.",
+    example: "To commit with title and description, run:",
+    code: 'git commit -m "Add user authentication" -m "Implements JWT-based auth with refresh tokens"',
+    category: "Staging & Committing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git commit -a",
+    description:
+      "Stages and commits all tracked files that have been modified. Skips the staging step for known files (won't include new untracked files).",
+    example: "To commit all tracked changes, run:",
+    code: "git commit -a",
+    category: "Staging & Committing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git commit --amend",
+    description:
+      "Modifies the most recent commit by adding new staged changes or changing the commit message. Opens editor for message editing.",
+    example: "To fix your last commit, run:",
+    code: "git commit --amend",
+    category: "Staging & Committing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git commit --amend --no-edit",
+    description:
+      "Adds staged changes to the last commit without changing its message. Quick way to add forgotten files to previous commit.",
+    example: "To add forgotten files to last commit, run:",
+    code: "git commit --amend --no-edit",
+    category: "Staging & Committing",
+    difficulty: "intermediate",
+  },
+  {
+    name: 'git commit --allow-empty -m "message"',
+    description:
+      "Creates a commit with no changes. Useful for triggering CI/CD pipelines or creating milestone commits with no actual code changes.",
+    example: "To create an empty commit, run:",
+    code: 'git commit --allow-empty -m "Trigger CI/CD pipeline"',
+    category: "Staging & Committing",
+    difficulty: "advanced",
+  },
 
-	{
-		name: "git merge [branch_name]",
-		description: "Combine changes from the specified branch into the current branch.",
-		example: 'To merge changes from the "feature" branch into the current branch, run:',
-		code: "git merge feature",
-		basic: "basic commands"
-	},
-	{
-		name: "git remote add [name] [url]",
-		description: "Add a new remote repository.",
-		example: 'To add a remote repository named "origin" with URL "https://github.com/Majid-Ali-Watto/Git-factory.git", run:',
-		code: "git remote add origin https://github.com/Majid-Ali-Watto/Git-factory.git",
-		basic: "basic commands"
-	},
-	{
-		name: "git remote -v",
-		description: "List all remote repositories and their URLs. It will show remote origins where repository is connected for push and pull.",
-		example: "To list all remote repositories and their URLs, run:",
-		code: "git remote -v"
-	},
-	{
-		name: "git log",
-		description: "Display commit history with author name, commit hash, date and commit message.",
-		example: "To display the commit history of the current branch, run:",
-		code: "git log"
-	},
-	{
-		name: "git show [commit]",
-		description: "Show changes introduced by a commit. Display commit history with author name, commit hash, date and commit message. What was added or removed?",
-		example: 'To show changes introduced by a specific commit with hash "abcd123", run:',
-		code: "git show abcd123"
-	},
-	{
-		name: "git diff",
-		description: "Show changes between commits, commit and working tree, etc.",
-		example: "To show the changes between the working directory and the staging area, run:",
-		code: "git diff"
-	},
-	{
-		name: "git stash",
-		description: "This command saves your current working directory's changes into a 'stash' so you can work on something else, like switching branches, without losing your uncommitted changes. The working directory is then restored to the state of the last commit.",
-		example: "To stash changes in your working directory, run:",
-		code: "git stash",
-		basic: "basic commands"
-	},
-	{
-		name: 'git stash save "Work in progress on feature X"',
-		description: "Stash changes with a descriptive message for easier identification later.",
-		example: "To stash changes with a specific message, run:",
-		code: 'git stash save "Work in progress on feature X"',
-		basic: "basic commands"
-	},
+  // Branching Commands
+  {
+    name: "git branch",
+    description:
+      "Lists all local branches. The current branch is marked with an asterisk (*). Does not show remote branches.",
+    example: "To see all local branches, run:",
+    code: "git branch",
+    basic: "basic commands",
+    category: "Branching",
+    difficulty: "beginner",
+  },
+  {
+    name: "git branch -a",
+    description:
+      "Lists all branches: both local and remote-tracking branches. Gives complete picture of all branches in the repository.",
+    example: "To see all branches, run:",
+    code: "git branch -a",
+    category: "Branching",
+    difficulty: "beginner",
+  },
+  {
+    name: "git branch -r",
+    description:
+      "Lists only remote-tracking branches. Shows branches that exist on the remote repository but may not be checked out locally.",
+    example: "To see only remote branches, run:",
+    code: "git branch -r",
+    category: "Branching",
+    difficulty: "beginner",
+  },
+  {
+    name: "git branch [branch_name]",
+    description:
+      "Creates a new branch at the current commit. Does not switch to the new branch - you'll need to 'checkout' to start using it.",
+    example: "To create a new branch, run:",
+    code: "git branch feature-new-ui",
+    basic: "basic commands",
+    category: "Branching",
+    difficulty: "beginner",
+  },
+  {
+    name: "git branch -d [branch_name]",
+    description:
+      "Safely deletes a branch only if it has been fully merged. Git refuses to delete if there are unmerged commits, protecting you from losing work.",
+    example: "To delete a merged branch, run:",
+    code: "git branch -d feature-login",
+    category: "Branching",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git branch -D [branch_name]",
+    description:
+      "Forcefully deletes a branch regardless of merge status. **Destructive** - use only when absolutely sure you want to lose that branch.",
+    example: "To force delete a branch, run:",
+    code: "git branch -D experimental-feature",
+    category: "Branching",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git branch -m [old_name] [new_name]",
+    description:
+      "Renames a branch. If you're on the branch you want to rename, you can omit the old name.",
+    example: "To rename a branch, run:",
+    code: "git branch -m old-name new-name",
+    category: "Branching",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git branch -M main",
+    description:
+      "Renames the current branch to 'main', forcefully overwriting if 'main' exists. Useful for changing default branch names.",
+    example: "To rename current branch to main, run:",
+    code: "git branch -M main",
+    category: "Branching",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git branch --contains [commit]",
+    description:
+      "Lists all branches that contain a specific commit. Helpful for finding which releases or branches include a particular change.",
+    example: "To find branches with a commit, run:",
+    code: "git branch --contains abcd123",
+    category: "Branching",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git checkout [branch_name]",
+    description:
+      "Switches your working directory to a different branch. Updates all files to match that branch's latest commit.",
+    example: "To switch to an existing branch, run:",
+    code: "git checkout feature-new-ui",
+    basic: "basic commands",
+    category: "Branching",
+    difficulty: "beginner",
+  },
+  {
+    name: "git checkout -b [branch]",
+    description:
+      "Creates a new branch and immediately switches to it. Shortcut combining 'branch' and 'checkout' in one command.",
+    example: "To create and switch to a new branch, run:",
+    code: "git checkout -b feature-user-profile",
+    basic: "basic commands",
+    category: "Branching",
+    difficulty: "beginner",
+  },
+  {
+    name: "git switch [branch_name]",
+    description:
+      "Modern alternative to 'checkout' for switching branches. Cleaner syntax dedicated specifically to branch switching.",
+    example: "To switch branches using modern syntax, run:",
+    code: "git switch feature-new-ui",
+    basic: "basic commands",
+    category: "Branching",
+    difficulty: "beginner",
+  },
+  {
+    name: "git switch -c [branch]",
+    description:
+      "Modern equivalent of 'checkout -b'. Creates and switches to a new branch using newer, cleaner Git syntax.",
+    example: "To create and switch using modern syntax, run:",
+    code: "git switch -c feature-notifications",
+    category: "Branching",
+    difficulty: "beginner",
+  },
+  {
+    name: "git checkout -",
+    description:
+      "Switches to the previously checked-out branch. Quick way to toggle between two branches without typing the full name.",
+    example: "To switch to the last branch, run:",
+    code: "git checkout -",
+    category: "Branching",
+    difficulty: "beginner",
+  },
 
-	{
-		name: "git stash apply",
-		description: "Applies a stash to the working directory.",
-		example: `git stash apply stash@{0}. If you don't specify a stash, the most recent stash is applied.`,
-		code: `git stash apply stash@{0}\t\tOR\t\tgit stash apply`
-	},
-	{
-		name: "git stash pop",
-		description: "Apply the most recent stash and remove it from the stash list.",
-		example: "To apply and remove the most recent stash, run:",
-		code: "git stash pop",
-		basic: "basic commands"
-	},
-	{
-		name: "git stash list",
-		description: "List all stashed changes.",
-		example: "To list all stashed changes or to list only specific count of stashed changes,e.g. to list the last 3 stashes add -3, run:",
-		code: "git stash list\t\tOR\t\tgit stash list -3"
-	},
-	{
-		name: "git stash drop [stash]",
-		description: "Remove a specific stash.",
-		example: 'To remove a stash named "stash@{0}", run:',
-		code: "git stash drop stash@{0}"
-	},
-	{
-		name: "git stash clear",
-		description: "Remove all stashed changes.",
-		example: "To remove all stashed changes, run:",
-		code: "git stash clear"
-	},
-	{
-		name: "git tag [tag_name]",
-		description: "Create a lightweight tag pointing to the current commit.",
-		example: 'To create a tag named "v1.0" for the current commit, run:',
-		code: "git tag v1.0",
-		basic: "basic commands"
-	},
+  // Remote Commands
+  {
+    name: "git remote add [name] [url]",
+    description:
+      "Connects your repository to a remote repository with a given name (usually 'origin'). Enables pushing and pulling from that remote.",
+    example: "To add a remote repository, run:",
+    code: "git remote add origin https://github.com/user/repo.git",
+    basic: "basic commands",
+    category: "Remote",
+    difficulty: "beginner",
+  },
+  {
+    name: "git remote -v",
+    description:
+      "Lists all configured remotes with their fetch and push URLs. Shows where your code is being pushed to and pulled from.",
+    example: "To view all remotes, run:",
+    code: "git remote -v",
+    category: "Remote",
+    difficulty: "beginner",
+  },
+  {
+    name: "git remote show [remote_name]",
+    description:
+      "Displays detailed information about a remote: branches, tracking configuration, and current status.",
+    example: "To see remote details, run:",
+    code: "git remote show origin",
+    category: "Remote",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git remote rm [name]",
+    description:
+      "Removes a remote repository connection from your local configuration. Does not affect the actual remote repository.",
+    example: "To remove a remote, run:",
+    code: "git remote rm old-remote",
+    category: "Remote",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git remote rename [old_name] [new_name]",
+    description:
+      "Renames a remote connection in your configuration. Useful when changing how you reference a remote.",
+    example: "To rename a remote, run:",
+    code: "git remote rename origin upstream",
+    category: "Remote",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git remote set-url [remote_name] [new_url]",
+    description:
+      "Changes the URL of an existing remote. Useful when migrating repositories or switching between HTTPS and SSH.",
+    example: "To change a remote URL, run:",
+    code: "git remote set-url origin https://github.com/new-user/new-repo.git",
+    category: "Remote",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git push -u origin [branch]",
+    description:
+      "Pushes a branch to remote and sets it as the upstream. The -u flag establishes tracking - essential for first push of new branches.",
+    example: "To push and set upstream, run:",
+    code: "git push -u origin feature-login",
+    basic: "basic commands",
+    category: "Remote",
+    difficulty: "beginner",
+  },
+  {
+    name: "git push [remote] [branch]",
+    description:
+      "Uploads commits from your local branch to the remote. After initial -u setup, just use this simpler form.",
+    example: "To push commits, run:",
+    code: "git push origin main",
+    basic: "basic commands",
+    category: "Remote",
+    difficulty: "beginner",
+  },
+  {
+    name: "git push --all",
+    description:
+      "Pushes all local branches to the remote at once, rather than pushing them individually.",
+    example: "To push all branches, run:",
+    code: "git push --all",
+    category: "Remote",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git push --force",
+    description:
+      "Forces a push even if it overwrites remote commits. **Use with extreme caution** - can cause loss for other team members. Only use in private branches.",
+    example: "To force push (use cautiously), run:",
+    code: "git push --force origin feature-branch",
+    category: "Remote",
+    difficulty: "advanced",
+  },
+  {
+    name: "git push --force-with-lease",
+    description:
+      "Safer alternative to --force that only overwrites if no one else has pushed. Protects against accidentally losing others' work.",
+    example: "To safely force push, run:",
+    code: "git push --force-with-lease origin feature-branch",
+    category: "Remote",
+    difficulty: "advanced",
+  },
+  {
+    name: "git push [remote] --delete [branch]",
+    description:
+      "Deletes a branch on the remote repository. Useful for cleaning up old feature branches after merging.",
+    example: "To delete a remote branch, run:",
+    code: "git push origin --delete feature-old",
+    category: "Remote",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git push --tags",
+    description:
+      "Pushes all local tags to remote without pushing any commits. Useful for publishing release versions.",
+    example: "To push all tags, run:",
+    code: "git push --tags",
+    category: "Remote",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git pull [remote] [branch]",
+    description:
+      "Fetches and merges changes from a remote branch into your current branch. Combines 'fetch' and 'merge' in one command.",
+    example: "To pull changes, run:",
+    code: "git pull origin main",
+    basic: "basic commands",
+    category: "Remote",
+    difficulty: "beginner",
+  },
+  {
+    name: "git pull",
+    description:
+      "Pulls from the tracked upstream branch (usually the branch you've previously pushed). Uses branch tracking to know where to pull from.",
+    example: "To pull from tracked upstream, run:",
+    code: "git pull",
+    basic: "basic commands",
+    category: "Remote",
+    difficulty: "beginner",
+  },
+  {
+    name: "git pull --rebase",
+    description:
+      "Fetches changes and rebases your commits on top instead of merging. Keeps history linear and clean without merge commits.",
+    example: "To pull with rebase, run:",
+    code: "git pull --rebase origin",
+    category: "Remote",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git fetch [remote]",
+    description:
+      "Downloads new commits and objects from remote without merging. Updates remote-tracking branches but leaves your working directory untouched.",
+    example: "To fetch updates, run:",
+    code: "git fetch origin",
+    basic: "basic commands",
+    category: "Remote",
+    difficulty: "beginner",
+  },
+  {
+    name: "git fetch --prune",
+    description:
+      "Fetches and removes stale remote-tracking branches for branches that no longer exist on remote. Cleans up deleted branches.",
+    example: "To fetch and prune, run:",
+    code: "git fetch --prune",
+    category: "Remote",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git fetch --all",
+    description:
+      "Fetches updates from all remote repositories, not just the default 'origin'. Useful when working with multiple remotes.",
+    example: "To fetch from all remotes, run:",
+    code: "git fetch --all",
+    category: "Remote",
+    difficulty: "intermediate",
+  },
 
-	{
-		name: 'git tag -a [tag_name] -m "message"',
-		description: "Create an annotated tag with a descriptive message.",
-		example: 'To create an annotated tag named "v1.0" with the message "Version 1.0 release", run:',
-		code: 'git tag -a v1.0 -m "Version 1.0 release"',
-		basic: "basic commands"
-	},
-	{
-		name: "git tag -d [tag_name]",
-		description: "Delete a tag from the local repository.",
-		example: 'To delete the tag named "v1.0", run:',
-		code: "git tag -d v1.0"
-	},
-	{
-		name: "git tag -l",
-		description: "List all tags in the repository.",
-		example: "To list all tags, run:",
-		code: "git tag -l"
-	},
-	{
-		name: "git show [tag_name]",
-		description: "Show detailed information about a specific tag.",
-		example: 'To show details about the tag named "v1.0", run:',
-		code: "git show v1.0"
-	},
-	{
-		name: "git push origin [tag_name]",
-		description: "Push a specific tag to the remote repository.",
-		example: 'To push the tag named "v1.0" to the remote repository, run:',
-		code: "git push origin v1.0",
-		basic: "basic commands"
-	},
-	{
-		name: "git push --tags",
-		description: "Push all tags to the remote repository.",
-		example: "To push all local tags to the remote repository, run:",
-		code: "git push --tags"
-	},
-	{
-		name: "git cherry-pick [commit1] [commit2] ...",
-		description: "The `git cherry-pick` command allows you to apply changes from one or more specific commits from another branch or location directly onto your current branch. This is useful when you want to integrate particular changes without merging an entire branch.",
-		example: "To apply the changes from commits 'abcd123' and 'efgh456' onto the current branch, run:",
-		code: "git cherry-pick abcd123 efgh456",
-		basic: "basic commands"
-	},
-	{
-		name: "git rebase [branch]",
-		description: "The `git rebase [branch]` command integrates changes from one branch into your current branch by replaying your commits on top of the specified branch. Unlike merging, rebasing rewrites the commit history, creating a cleaner, linear history without merge commits.",
-		example: "To rebase the current branch onto the 'master' branch, applying your commits on top of 'master', run:",
-		code: "git rebase master"
-	},
-	{
-		name: "git pull --rebase",
-		description: "The `git pull --rebase` command fetches changes from the remote repository and rebases your current branch on top of the fetched commits instead of merging. This avoids unnecessary merge commits and keeps your project history linear and clean.",
-		example: "To fetch and rebase the changes from the remote repository 'origin' instead of merging them, run:",
-		code: "git pull --rebase origin"
-	},
-	{
-		name: "git rebase --abort",
-		description: "The `git rebase --abort` command stops an ongoing rebase process and returns your repository to the exact state it was in before the rebase began. This is helpful if you encounter conflicts or issues and decide not to continue with the rebase.",
-		example: "If conflicts arise during a rebase and you want to cancel it, run:",
-		code: "git rebase --abort"
-	},
-	{
-		name: "git rebase --continue",
-		description: "The `git rebase --continue` command is used to resume an ongoing rebase after you have resolved any conflicts. It tells Git that the conflicts have been fixed and it can proceed with applying the rest of the commits.",
-		example: "After resolving any conflicts during a rebase, to continue the rebase process, run:",
-		code: "git rebase --continue"
-	},
+  // Merging & Rebasing
+  {
+    name: "git merge [branch_name]",
+    description:
+      "Combines commits from another branch into your current branch. Creates a merge commit linking the two branches' histories.",
+    example: "To merge a branch, run:",
+    code: "git merge feature-login",
+    basic: "basic commands",
+    category: "Merging & Rebasing",
+    difficulty: "beginner",
+  },
+  {
+    name: "git merge --no-ff [branch]",
+    description:
+      "Merges while creating a merge commit even if fast-forward is possible. Preserves branch structure in history for better traceability.",
+    example: "To merge with history preserved, run:",
+    code: "git merge --no-ff feature-settings",
+    category: "Merging & Rebasing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git merge --squash [branch]",
+    description:
+      "Combines all commits from another branch into a single commit before merging. Cleans up history by consolidating branch work into one commit.",
+    example: "To squash and merge, run:",
+    code: "git merge --squash feature-temp-work",
+    category: "Merging & Rebasing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git merge --abort",
+    description:
+      "Cancels an ongoing merge process if you encounter conflicts or change your mind. Returns to the state before the merge started.",
+    example: "To abort a merge, run:",
+    code: "git merge --abort",
+    category: "Merging & Rebasing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git rebase [branch]",
+    description:
+      "Re-applies your commits on top of another branch. Creates cleaner, linear history compared to merging by replaying commits.",
+    example: "To rebase, run:",
+    code: "git rebase main",
+    category: "Merging & Rebasing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git rebase -i [commit]",
+    description:
+      "Interactive rebase - reorder, squash, or edit commits. Powerful tool for cleaning up commit history before pushing.",
+    example: "To rebase interactively, run:",
+    code: "git rebase -i HEAD~3",
+    category: "Merging & Rebasing",
+    difficulty: "advanced",
+  },
+  {
+    name: "git rebase --abort",
+    description:
+      "Cancels an ongoing rebase if you encounter conflicts or issues. Returns to the state before rebase started.",
+    example: "To cancel a rebase, run:",
+    code: "git rebase --abort",
+    category: "Merging & Rebasing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git rebase --continue",
+    description:
+      "Resumes a paused rebase after resolving conflicts. Git continues applying the remaining commits.",
+    example: "To continue after resolving conflicts, run:",
+    code: "git rebase --continue",
+    category: "Merging & Rebasing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git cherry-pick [commit]",
+    description:
+      "Applies changes from a specific commit onto your current branch. Useful for selectively bringing in changes without merging entire branches.",
+    example: "To cherry-pick a commit, run:",
+    code: "git cherry-pick abcd123",
+    basic: "basic commands",
+    category: "Merging & Rebasing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git cherry-pick [commit1] [commit2] ...",
+    description:
+      "Cherry-picks multiple specific commits in sequence. Useful for integrating several commits without merging.",
+    example: "To cherry-pick multiple, run:",
+    code: "git cherry-pick abcd123 efgh456",
+    basic: "basic commands",
+    category: "Merging & Rebasing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git cherry-pick --abort",
+    description:
+      "Cancels an ongoing cherry-pick operation. Returns to the state before cherry-pick started.",
+    example: "To cancel cherry-pick, run:",
+    code: "git cherry-pick --abort",
+    category: "Merging & Rebasing",
+    difficulty: "intermediate",
+  },
 
-	{
-		name: "git reset <file>",
-		description: "Unstage changes for the specified file while keeping the changes in the working directory.",
-		example: "To unstage changes for 'myfile.txt' without deleting the changes, run:",
-		code: "git reset myfile.txt"
-	},
-	{
-		name: "git checkout -- [file]",
-		description: "The `git checkout -- [file]` command discards any local changes made to a specific file in your working directory, reverting it back to the last committed state. This is useful if you want to undo modifications to a file and return it to how it was in the last commit.",
-		example: "To discard changes made to a file named 'index.html' and restore it to the version in the last commit, run:",
-		code: "git checkout -- index.html\t\tOR\t\tgit checkout -- src/App.jsx"
-	},
+  // Stashing
+  {
+    name: "git stash",
+    description:
+      "Temporarily saves work-in-progress changes without committing. Cleans your working directory so you can switch branches or pull updates.",
+    example: "To save work temporarily, run:",
+    code: "git stash",
+    basic: "basic commands",
+    category: "Stashing",
+    difficulty: "intermediate",
+  },
+  {
+    name: 'git stash save "Work in progress"',
+    description:
+      "Stashes changes with a descriptive message for easier identification when reviewing stashes later.",
+    example: "To stash with a message, run:",
+    code: 'git stash save "WIP: User auth form"',
+    basic: "basic commands",
+    category: "Stashing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git stash list",
+    description:
+      "Lists all stashed changes with references (stash@{0}, stash@{1}, etc.). Helps you track saved work.",
+    example: "To view all stashes, run:",
+    code: "git stash list",
+    category: "Stashing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git stash apply",
+    description:
+      "Applies a stash back to your working directory without removing it from the stash list. Stash remains available.",
+    example: "To apply a stash, run:",
+    code: "git stash apply stash@{0}",
+    category: "Stashing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git stash pop",
+    description:
+      "Applies the most recent stash and removes it from the stash list. One-command alternative to apply + drop.",
+    example: "To apply and remove most recent stash, run:",
+    code: "git stash pop",
+    basic: "basic commands",
+    category: "Stashing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git stash drop [stash]",
+    description:
+      "Permanently deletes a specific stash. Once dropped, the stashed changes cannot be recovered.",
+    example: "To delete a stash, run:",
+    code: "git stash drop stash@{0}",
+    category: "Stashing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git stash clear",
+    description:
+      "Permanently deletes all stashes. Cannot be undone - use with caution!",
+    example: "To delete all stashes, run:",
+    code: "git stash clear",
+    category: "Stashing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git stash show",
+    description:
+      "Shows the changes in a stash without applying it. Useful for previewing what's in a stash before applying.",
+    example: "To preview a stash, run:",
+    code: "git stash show stash@{0}",
+    category: "Stashing",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git stash branch [branch_name]",
+    description:
+      "Creates a new branch and applies a stash to it. Useful if you stashed work and then made conflicting changes.",
+    example: "To apply stash to new branch, run:",
+    code: "git stash branch my-stash-branch",
+    category: "Stashing",
+    difficulty: "advanced",
+  },
 
-	{
-		name: "git revert [commit]",
-		description: "Reverse a commit by creating a new commit.",
-		example: 'To reverse the changes introduced by a commit with hash "abcd123", run:',
-		code: "git revert abcd123"
-	},
-	{
-		name: "git reset --hard [commit]",
-		description: "Reset the current branch and index to a specified state.",
-		example: 'To reset the current branch and index to the state of a commit with hash "abcd123", run:',
-		code: "git reset --hard abcd123"
-	},
-	{
-		name: "git reset --soft [commit]",
-		description: "Reset the current branch to a specified commit but keep changes in the working directory.",
-		example: 'To reset the current branch to a commit with hash "abcd123" but keep changes in the working directory, run:',
-		code: "git reset --soft abcd123"
-	},
-	{
-		name: "git reset --mixed <commit-hash>",
-		description: "Undo commits and unstage changes, but keep the working directory intact.",
-		example: "To reset the commit history up to 'abc123' and unstage the changes, run:",
-		code: "git reset --mixed abc123"
-	},
-	{
-		name: "git restore [file]",
-		description: "Restore changes in the working directory for a file to their state at the last commit.",
-		example: 'To restore changes in the working directory for a file named "index.html" to their state at the last commit, run:',
-		code: "git restore index.html"
-	},
-	{
-		name: "git restore --staged <file>",
-		description: "Unstage changes without altering the file in the working directory.",
-		example: "To unstage changes for 'myfile.txt', run:",
-		code: "git restore --staged myfile.txt"
-	},
-	{
-		name: "git rm --cached -r <directory>",
-		description: "Remove a directory or file from the staging area (index) while keeping it in the working directory. This is often used when you want to stop tracking a file or directory in Git without deleting it from your local system.",
-		example: "To stop tracking the 'dev-dist/' directory but keep it in your working directory, run:",
-		code: "git rm --cached -r dev-dist/"
-	},
+  // Tagging
+  {
+    name: "git tag [tag_name]",
+    description:
+      "Creates a lightweight tag pointing to the current commit. Tags mark specific points in history like release versions.",
+    example: "To create a tag, run:",
+    code: "git tag v1.0.0",
+    basic: "basic commands",
+    category: "Tagging",
+    difficulty: "beginner",
+  },
+  {
+    name: 'git tag -a [tag_name] -m "message"',
+    description:
+      "Creates an annotated tag (preferred method) with descriptive message, author, and timestamp. More durable than lightweight tags.",
+    example: "To create an annotated tag, run:",
+    code: 'git tag -a v1.0.0 -m "Release version 1.0.0"',
+    basic: "basic commands",
+    category: "Tagging",
+    difficulty: "beginner",
+  },
+  {
+    name: "git tag",
+    description:
+      "Lists all tags in the repository. Shows all marked releases and versions.",
+    example: "To list all tags, run:",
+    code: "git tag",
+    category: "Tagging",
+    difficulty: "beginner",
+  },
+  {
+    name: "git tag -l [pattern]",
+    description:
+      "Lists tags matching a pattern. Useful for filtering tags by version numbers or prefixes.",
+    example: "To list tags matching pattern, run:",
+    code: "git tag -l 'v1.*'",
+    category: "Tagging",
+    difficulty: "beginner",
+  },
+  {
+    name: "git show [tag_name]",
+    description:
+      "Shows detailed information about a tag including the tagged commit, tagger, date, and message.",
+    example: "To view tag details, run:",
+    code: "git show v1.0.0",
+    category: "Tagging",
+    difficulty: "beginner",
+  },
+  {
+    name: "git tag -d [tag_name]",
+    description:
+      "Deletes a tag from the local repository. Useful for removing accidentally created or outdated tags.",
+    example: "To delete a tag, run:",
+    code: "git tag -d v1.0.0",
+    category: "Tagging",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git push origin [tag_name]",
+    description:
+      "Pushes a specific tag to the remote repository, making it available to other team members and CI/CD systems.",
+    example: "To push a tag, run:",
+    code: "git push origin v1.0.0",
+    basic: "basic commands",
+    category: "Tagging",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git push origin --delete [tag]",
+    description:
+      "Deletes a tag from the remote repository. Useful for cleaning up mistagged versions.",
+    example: "To delete a remote tag, run:",
+    code: "git push origin --delete v0.9.0",
+    category: "Tagging",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git push --tags",
+    description:
+      "Pushes all local tags to remote at once, without pushing any commits. Useful for publishing all release versions.",
+    example: "To push all tags, run:",
+    code: "git push --tags",
+    category: "Tagging",
+    difficulty: "intermediate",
+  },
 
-	{
-		name: "git gc",
-		description: "Cleanup unnecessary files and optimize the local repository.",
-		example: "To run garbage collection and optimize the repository, run:",
-		code: "git gc"
-	},
-	{
-		name: "git commit --allow-empty -m 'message'",
-		description: "Create an empty commit with a message.",
-		example: "To create an empty commit with the message 'Initial commit', run:",
-		code: "git commit --allow-empty -m 'Initial commit'"
-	},
-	{
-		name: "git fetch [remote]",
-		description: "This command is used to download objects and references (refs) from another repository, typically a remote repository. It updates your local repository with the latest commits, branches, and tags from the remote repository without merging them into your working branch.",
-		example: 'To download objects and refs from the remote repository "origin", run:',
-		code: "git fetch origin",
-		basic: "basic commands"
-	},
-	{
-		name: "git remote rm [name]",
-		description: "Remove a remote repository.",
-		example: 'To remove a remote repository named "origin", run:',
-		code: "git remote rm origin"
-	},
-	{
-		name: "git branch -d <branch-name>",
-		description: "Delete the specified branch only if it has been fully merged into your current branch or another branch. If the branch hasn't been merged, Git will refuse to delete it to prevent potential data loss.",
-		example: "To delete the 'test' branch only if it's merged, run:",
-		code: "git branch -d test"
-	},
-	{
-		name: "git branch -D <branch-name>",
-		description: "Forcefully delete the specified branch, even if it hasn't been fully merged into your current branch or any other branches. **Use with caution as this action cannot be undone easily.**",
-		example: "To forcefully delete the branch named 'test', run:",
-		code: "git branch -D test"
-	},
+  // History & Inspection
+  {
+    name: "git log",
+    description:
+      "Displays commit history of current branch with hash, author, date, and message. Shows newest commits first. Press 'q' to exit.",
+    example: "To view history, run:",
+    code: "git log",
+    category: "History & Inspection",
+    difficulty: "beginner",
+  },
+  {
+    name: "git log --oneline",
+    description:
+      "Compact commit history with abbreviated hashes and single-line messages. Quick overview of recent commits.",
+    example: "To see compact history, run:",
+    code: "git log --oneline",
+    category: "History & Inspection",
+    difficulty: "beginner",
+  },
+  {
+    name: "git log --graph --oneline --decorate --all",
+    description:
+      "Visualizes commit history as a graph showing branches and merges. Great for understanding repository structure.",
+    example: "To visualize history graph, run:",
+    code: "git log --graph --oneline --decorate --all",
+    category: "History & Inspection",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git log -p",
+    description:
+      "Shows detailed commit history with full diffs (patches) for each commit. Verbose but shows exact line changes.",
+    example: "To see history with diffs, run:",
+    code: "git log -p",
+    category: "History & Inspection",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git log --stat",
+    description:
+      "Shows history with statistics: which files changed and how many lines added/removed. Summary view of changes.",
+    example: "To see history with stats, run:",
+    code: "git log --stat",
+    category: "History & Inspection",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git log --follow [file]",
+    description:
+      "Shows complete history of a file including renames. Traces file's evolution across name changes.",
+    example: "To see file history with renames, run:",
+    code: "git log --follow index.html",
+    category: "History & Inspection",
+    difficulty: "intermediate",
+  },
+  {
+    name: 'git log --author="[name]"',
+    description:
+      "Filters commit history to show only commits by a specific author. Useful for finding who made certain changes.",
+    example: "To filter by author, run:",
+    code: 'git log --author="Majid Ali"',
+    category: "History & Inspection",
+    difficulty: "intermediate",
+  },
+  {
+    name: 'git log --grep="[pattern]"',
+    description:
+      "Searches commit messages for pattern matching. Finds commits about specific features, bugs, or keywords.",
+    example: "To search commits, run:",
+    code: 'git log --grep="bug fix"',
+    category: "History & Inspection",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git log --since=[date]",
+    description:
+      "Shows commits after a specific date. Format: YYYY-MM-DD or relative (2.weeks, 1.month, etc.).",
+    example: "To see commits since date, run:",
+    code: "git log --since=2024-01-01",
+    category: "History & Inspection",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git log --until=[date]",
+    description:
+      "Shows commits before a specific date. Can combine with --since for date range queries.",
+    example: "To see commits until date, run:",
+    code: "git log --until=2024-12-31",
+    category: "History & Inspection",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git log -n [number]",
+    description:
+      "Limits output to the last N commits. Useful for focusing on recent history.",
+    example: "To see last 5 commits, run:",
+    code: "git log -n 5",
+    category: "History & Inspection",
+    difficulty: "beginner",
+  },
+  {
+    name: "git show [commit]",
+    description:
+      "Shows detailed information about a specific commit: changes, author, date, and full diff.",
+    example: "To view a commit, run:",
+    code: "git show abcd123",
+    category: "History & Inspection",
+    difficulty: "beginner",
+  },
+  {
+    name: "git diff",
+    description:
+      "Shows changes between working directory and last commit. Reveals what you've modified but not staged.",
+    example: "To see unstaged changes, run:",
+    code: "git diff",
+    category: "History & Inspection",
+    difficulty: "beginner",
+  },
+  {
+    name: "git diff --cached",
+    description:
+      "Shows differences between staged changes and last commit. Review what's about to be committed.",
+    example: "To see staged changes, run:",
+    code: "git diff --cached",
+    category: "History & Inspection",
+    difficulty: "beginner",
+  },
+  {
+    name: "git diff [branch1] [branch2]",
+    description:
+      "Compares all changes between two branches. Shows what would differ if you merged them.",
+    example: "To compare branches, run:",
+    code: "git diff main feature-branch",
+    category: "History & Inspection",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git diff [commit1] [commit2]",
+    description:
+      "Shows differences between two commits. Useful for understanding what changed between versions.",
+    example: "To compare commits, run:",
+    code: "git diff abcd123 efgh456",
+    category: "History & Inspection",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git diff --name-only [branch1] [branch2]",
+    description:
+      "Lists only filenames that differ between two branches. Useful for seeing what changed without diffs.",
+    example: "To see changed files only, run:",
+    code: "git diff --name-only main feature",
+    category: "History & Inspection",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git diff --stat [commit1] [commit2]",
+    description:
+      "Shows summary of changes between commits with file statistics. Concise view of impact.",
+    example: "To see change statistics, run:",
+    code: "git diff --stat abcd123 efgh456",
+    category: "History & Inspection",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git shortlog",
+    description:
+      "Summarizes commit history grouped by author with counts. Shows who contributed how much.",
+    example: "To see author summary, run:",
+    code: "git shortlog",
+    category: "History & Inspection",
+    difficulty: "beginner",
+  },
+  {
+    name: "git blame [file]",
+    description:
+      "Shows who last modified each line of a file and in which commit. Useful for understanding code history.",
+    example: "To see line-by-line authors, run:",
+    code: "git blame index.html",
+    category: "History & Inspection",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git grep [pattern]",
+    description:
+      "Searches tracked file contents for a pattern. Git-aware version of grep, faster and version-aware.",
+    example: "To search files, run:",
+    code: 'git grep "TODO"',
+    category: "History & Inspection",
+    difficulty: "intermediate",
+  },
 
-	{
-		name: "git push [remote] --delete [branch_name]",
-		description: "Delete a branch on the remote repository.",
-		example: 'To delete a branch named "feature" on the remote repository "origin", run:',
-		code: "git push origin --delete feature"
-	},
-	{
-		name: "git fetch --prune",
-		description: "Remove remote tracking branches that no longer exist on the remote.",
-		example: 'To remove remote tracking branches that no longer exist on the remote repository "origin", run:',
-		code: "git fetch --prune"
-	},
-	{
-		name: "git log --graph --oneline --decorate --all",
-		description: "Visualize the commit history graph.",
-		example: "To visualize the commit history graph with one-line commit messages and decorations, run:",
-		code: "git log --graph --oneline --decorate --all"
-	},
-	{
-		name: "git log --since=[date]",
-		description: "Show commit history since a specific date.",
-		example: "To show commit history since January 1, 2022, run:",
-		code: "git log --since=2022-01-01"
-	},
-	{
-		name: "git log --until=[date]",
-		description: "Show commit history until a specific date.",
-		example: "To show commit history until December 31, 2022, run:",
-		code: "git log --until=2022-12-31"
-	},
-	{
-		name: "git log --stat",
-		description: "Display additional statistics in the commit log including date,time and author.",
-		example: "To display additional statistics in the commit log, run:",
-		code: "git log --stat"
-	},
-	{
-		name: "git shortlog",
-		description: "Summarize git log output by user in simple words.",
-		example: "To summarize git log output by user, run:",
-		code: "git shortlog"
-	},
-	{
-		name: "git log --graph",
-		description: "Display commit history in a more visual way.",
-		example: "To display commit history in a more visual way, run:",
-		code: "git log --graph"
-	},
-	{
-		name: "git diff [branch1] [branch2]",
-		description: "Show the differences between two branches.",
-		example: 'To show the differences between the "main" and "feature" branches, run:',
-		code: "git diff main feature"
-	},
-	{
-		name: "git show-branch --all",
-		description: "Show branches, their commits, and their relationships.",
-		example: "To show branches, their commits, and their relationships, run:",
-		code: "git show-branch --all"
-	},
-	{
-		name: "git diff [commit1] [commit2]",
-		description: "Show the differences between two commits.",
-		example: 'To show the differences between commits "abcd123" and "efgh456", run:',
-		code: "git diff abcd123 efgh456"
-	},
-	{
-		name: "git blame [file]",
-		description: "Show who last modified each line of a file and when.",
-		example: 'To show who last modified each line of a file named "index.html" and when, run:',
-		code: "git blame index.html"
-	},
-	{
-		name: "git grep [pattern]",
-		description: "Search the contents of files in the repository for a pattern.",
-		example: 'To search the contents of files in the repository for the pattern "TODO", run:',
-		code: 'git grep "TODO"'
-	},
-	{
-		name: 'git log --author="[author_name]"',
-		description: "Filter commit history by author.",
-		example: 'To filter commit history by author name "Majid Ali", run:',
-		code: 'git log --author="Majid Ali"'
-	},
-	{
-		name: 'git log --grep="[commit_message]"',
-		description: "Filter commit history by commit message.",
-		example: 'To filter commit history by commit message containing "bug fix", run:',
-		code: 'git log --grep="bug fix"'
-	},
+  // Undoing Changes
+  {
+    name: "git reset [file]",
+    description:
+      "Unstages a file from the staging area. Changes remain in working directory - safe operation.",
+    example: "To unstage a file, run:",
+    code: "git reset myfile.txt",
+    category: "Undoing Changes",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git reset --soft [commit]",
+    description:
+      "Moves HEAD to a previous commit while keeping changes staged. Useful for reorganizing commits.",
+    example: "To soft reset, run:",
+    code: "git reset --soft abcd123",
+    category: "Undoing Changes",
+    difficulty: "advanced",
+  },
+  {
+    name: "git reset --mixed [commit]",
+    description:
+      "Moves HEAD and unstages changes. Files remain modified but not staged. Default reset behavior.",
+    example: "To reset and unstage, run:",
+    code: "git reset --mixed abc123",
+    category: "Undoing Changes",
+    difficulty: "advanced",
+  },
+  {
+    name: "git reset --hard [commit]",
+    description:
+      "Completely resets to a previous commit, discarding all changes. **Destructive** - use with caution!",
+    example: "To hard reset, run:",
+    code: "git reset --hard abcd123",
+    category: "Undoing Changes",
+    difficulty: "advanced",
+  },
+  {
+    name: "git revert [commit]",
+    description:
+      "Creates a new commit that undoes changes from a previous commit. Safe for shared branches - preserves history.",
+    example: "To undo via revert, run:",
+    code: "git revert abcd123",
+    category: "Undoing Changes",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git checkout -- [file]",
+    description:
+      "Discards local changes to a file, restoring it to the last commit. **Destructive** - cannot be undone.",
+    example: "To discard changes, run:",
+    code: "git checkout -- index.html",
+    category: "Undoing Changes",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git restore [file]",
+    description:
+      "Modern alternative to 'checkout --'. Restores a file to its committed state, discarding changes.",
+    example: "To restore a file, run:",
+    code: "git restore index.html",
+    category: "Undoing Changes",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git restore --staged [file]",
+    description:
+      "Unstages a file without affecting working directory. Modern alternative to 'git reset'.",
+    example: "To unstage (modern way), run:",
+    code: "git restore --staged myfile.txt",
+    category: "Undoing Changes",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git clean -df",
+    description:
+      "Removes untracked files and directories. **Destructive** - use 'git clean -dn' to preview first!",
+    example: "To remove untracked files, run:",
+    code: "git clean -df",
+    category: "Undoing Changes",
+    difficulty: "advanced",
+  },
+  {
+    name: "git clean -dn",
+    description:
+      "Shows what untracked files would be deleted without actually deleting. Safe preview for 'git clean -df'.",
+    example: "To preview deletion, run:",
+    code: "git clean -dn",
+    category: "Undoing Changes",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git rm --cached -r [directory]",
+    description:
+      "Stops tracking a directory in Git without deleting it locally. Useful for removing accidentally tracked folders.",
+    example: "To stop tracking directory, run:",
+    code: "git rm --cached -r dev-dist/",
+    category: "Staging & Committing",
+    difficulty: "intermediate",
+  },
 
-	{
-		name: "git log --follow [file]",
-		description: "Show the history of a file, including renames.",
-		example: 'To show the history of a file named "index.html", including renames, run:',
-		code: "git log --follow index.html"
-	},
-	{
-		name: "git diff --cached",
-		description: "Show changes staged for commit.",
-		example: "To show changes staged for commit, run:",
-		code: "git diff --cached"
-	},
-	{
-		name: "git commit --amend",
-		description: "Amend (to change or modify) the last commit with new changes.",
-		example: "To amend the last commit with new changes, run:",
-		code: "git commit --amend"
-	},
-	{
-		name: "git branch -M main",
-		description: "The `git branch -M main` command renames the current branch to 'main', using the `-M` flag to force the rename. This is useful for changing the default branch name, especially in scenarios where you want to adopt 'main' as the primary branch instead of 'master'. If a branch named 'main' already exists, it will be overwritten.",
-		example: "To rename the current branch to 'main', run:",
-		code: "git branch -M main"
-	},
+  // Repository Information
+  {
+    name: "git rev-parse HEAD",
+    description:
+      "Returns the full commit hash of the current HEAD. Useful for scripts and CI/CD automation.",
+    example: "To get current commit hash, run:",
+    code: "git rev-parse HEAD",
+    category: "Repository Information",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git rev-parse --short HEAD",
+    description:
+      "Returns abbreviated (7-char) version of current commit hash. More readable for display.",
+    example: "To get short hash, run:",
+    code: "git rev-parse --short HEAD",
+    category: "Repository Information",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git rev-parse --abbrev-ref HEAD",
+    description:
+      "Returns the name of the current branch. Useful for scripts needing to know current branch.",
+    example: "To get branch name, run:",
+    code: "git rev-parse --abbrev-ref HEAD",
+    category: "Repository Information",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git describe --tags",
+    description:
+      "Shows the most recent tag reachable from current commit. Useful for determining version.",
+    example: "To find nearest tag, run:",
+    code: "git describe --tags",
+    category: "Repository Information",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git ls-files",
+    description:
+      "Lists all files currently tracked by Git. Useful for seeing what's under version control.",
+    example: "To see tracked files, run:",
+    code: "git ls-files",
+    category: "Repository Information",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git symbolic-ref HEAD",
+    description:
+      "Shows what branch HEAD is pointing to. Returns current branch reference.",
+    example: "To see HEAD reference, run:",
+    code: "git symbolic-ref HEAD",
+    category: "Repository Information",
+    difficulty: "advanced",
+  },
+  {
+    name: "git name-rev [commit]",
+    description:
+      "Shows human-readable name for a commit relative to tags/branches. Useful for commit description.",
+    example: "To get readable name, run:",
+    code: "git name-rev abcd123",
+    category: "Repository Information",
+    difficulty: "advanced",
+  },
 
-	{
-		name: "git branch -m [old_branch] [new_branch]",
-		description: "The `git branch -m` command renames an existing branch in your Git repository. If you provide only one argument, it renames the current branch to the specified name. This command is useful for improving branch naming conventions or correcting naming mistakes without affecting your commit history.",
-		example: "To rename the branch 'feature-xyz' to 'feature-abc', run:\n\n1. For renaming the current branch:\n   `git branch -m feature-abc`\n\n2. For renaming a specific branch:\n   `git branch -m feature-xyz feature-abc`",
-		code: "git branch -m feature-xyz feature-abc"
-	},
+  // Advanced & Debugging
+  {
+    name: "git reflog",
+    description:
+      "Shows log of all HEAD movements: commits, resets, rebases, etc. Useful for recovering lost commits.",
+    example: "To view operation history, run:",
+    code: "git reflog",
+    category: "Repository",
+    difficulty: "advanced",
+  },
+  {
+    name: "git fsck --lost-found",
+    description:
+      "Scans for lost commits and objects in the repository. Can help recover work lost to resets.",
+    example: "To find lost commits, run:",
+    code: "git fsck --lost-found",
+    category: "Repository",
+    difficulty: "advanced",
+  },
+  {
+    name: "git gc",
+    description:
+      "Garbage collection - removes unreachable objects and optimizes database. Improves performance.",
+    example: "To optimize repository, run:",
+    code: "git gc",
+    category: "Repository",
+    difficulty: "advanced",
+  },
+  {
+    name: "git bisect start",
+    description:
+      "Initiates binary search to find which commit introduced a bug. Interactive process marking commits good/bad.",
+    example: "To start bisecting, run:",
+    code: "git bisect start",
+    category: "Debugging",
+    difficulty: "advanced",
+  },
+  {
+    name: "git bisect bad",
+    description:
+      "Marks current commit as 'bad' during bisect. Continues searching in earlier history.",
+    example: "During bisect, mark as bad:",
+    code: "git bisect bad",
+    category: "Debugging",
+    difficulty: "advanced",
+  },
+  {
+    name: "git bisect good",
+    description:
+      "Marks current commit as 'good' during bisect. Continues searching in later history.",
+    example: "During bisect, mark as good:",
+    code: "git bisect good",
+    category: "Debugging",
+    difficulty: "advanced",
+  },
+  {
+    name: "git bisect reset",
+    description:
+      "Ends bisect session and returns to original branch. Use after finding problematic commit.",
+    example: "To end bisect, run:",
+    code: "git bisect reset",
+    category: "Debugging",
+    difficulty: "advanced",
+  },
+  {
+    name: "git archive [branch] --format=zip --output=[file.zip]",
+    description:
+      "Creates zip archive of a branch without .git directory. Useful for distributing clean versions.",
+    example: "To create archive, run:",
+    code: "git archive main --format=zip --output=project.zip",
+    category: "Repository",
+    difficulty: "advanced",
+  },
+  {
+    name: "git mv [old_path] [new_path]",
+    description:
+      "Moves or renames a file while preserving Git history. Automatically stages the change.",
+    example: "To move/rename file, run:",
+    code: "git mv old-name.txt new-name.txt",
+    category: "Repository",
+    difficulty: "intermediate",
+  },
+  {
+    name: "git submodule add [repo_url] [path]",
+    description:
+      "Adds external Git repository as submodule. Includes another repo in your project while keeping it separate.",
+    example: "To add submodule, run:",
+    code: "git submodule add https://github.com/user/repo.git path/to/sub",
+    category: "Advanced",
+    difficulty: "advanced",
+  },
+  {
+    name: "git submodule init",
+    description:
+      "Initializes submodules from .gitmodules file. Required before pulling submodule content.",
+    example: "To init submodules, run:",
+    code: "git submodule init",
+    category: "Advanced",
+    difficulty: "advanced",
+  },
+  {
+    name: "git submodule update",
+    description:
+      "Fetches and checks out correct commits for submodules. Ensures submodules match main repository.",
+    example: "To update submodules, run:",
+    code: "git submodule update",
+    category: "Advanced",
+    difficulty: "advanced",
+  },
+  {
+    name: "git submodule foreach git pull",
+    description:
+      "Runs git pull in every submodule directory. Updates all submodules at once.",
+    example: "To update all submodules, run:",
+    code: "git submodule foreach git pull",
+    category: "Advanced",
+    difficulty: "advanced",
+  },
+  {
+    name: "git worktree add [path] [branch]",
+    description:
+      "Creates new working tree for multiple branches simultaneously. Work in different directories on different branches.",
+    example: "To create working tree, run:",
+    code: "git worktree add ../bug-fix main",
+    category: "Advanced",
+    difficulty: "advanced",
+  },
+  {
+    name: "git worktree list",
+    description:
+      "Lists all working trees created for this repository. Shows paths and branch information.",
+    example: "To view working trees, run:",
+    code: "git worktree list",
+    category: "Advanced",
+    difficulty: "advanced",
+  },
+  {
+    name: "git worktree remove [path]",
+    description:
+      "Removes a working tree. Cleans up directory and removes worktree reference.",
+    example: "To remove working tree, run:",
+    code: "git worktree remove ../bug-fix",
+    category: "Advanced",
+    difficulty: "advanced",
+  },
+  {
+    name: "git format-patch -n HEAD",
+    description:
+      "Creates patch files from last N commits. Useful for emailing changes or applying to other repos.",
+    example: "To create patches, run:",
+    code: "git format-patch -1 HEAD",
+    category: "Advanced",
+    difficulty: "advanced",
+  },
+  {
+    name: "git apply [patch_file]",
+    description:
+      "Applies changes from patch file to working directory. Git-aware version of patch command.",
+    example: "To apply patch, run:",
+    code: "git apply fix.patch",
+    category: "Advanced",
+    difficulty: "advanced",
+  },
+  {
+    name: "git am [patch_file]",
+    description:
+      "Applies patch and creates commit with original author/date metadata. Preserves patch commit info.",
+    example: "To apply patch as commit, run:",
+    code: "git am fix.patch",
+    category: "Advanced",
+    difficulty: "advanced",
+  },
+  {
+    name: "git cat-file -p [object]",
+    description:
+      "Displays contents of a Git object. Useful for understanding Git's internal structure.",
+    example: "To view Git object, run:",
+    code: "git cat-file -p abcd123",
+    category: "Advanced",
+    difficulty: "advanced",
+  },
+  {
+    name: "git hash-object [file]",
+    description:
+      "Calculates Git hash for a file without staging/committing. Useful for comparing versions.",
+    example: "To calculate hash, run:",
+    code: "git hash-object index.html",
+    category: "Advanced",
+    difficulty: "advanced",
+  },
+  {
+    name: "git verify-commit [commit]",
+    description:
+      "Verifies GPG signature of a commit. Ensures commit authenticity in secure environments.",
+    example: "To verify signature, run:",
+    code: "git verify-commit abcd123",
+    category: "Advanced",
+    difficulty: "advanced",
+  },
+  {
+    name: "git filter-branch",
+    description:
+      "Rewrites Git history. Advanced tool for removing sensitive data or restructuring. **Affects other developers!**",
+    example: "To filter history, run:",
+    code: "git filter-branch --tree-filter 'rm -f secrets.txt'",
+    category: "Advanced",
+    difficulty: "advanced",
+  },
+  {
+    name: "git for-each-ref",
+    description:
+      "Lists all refs (branches, tags, remotes) with custom output format. Powerful for scripting.",
+    example: "To list refs, run:",
+    code: "git for-each-ref --sort=version:refname",
+    category: "Advanced",
+    difficulty: "advanced",
+  },
+  {
+    name: "git update-index --assume-unchanged [file]",
+    description:
+      "Tells Git to ignore changes to a file without removing it from version control. Useful for configs.",
+    example: "To ignore file changes, run:",
+    code: "git update-index --assume-unchanged config.json",
+    category: "Configuration",
+    difficulty: "advanced",
+  },
+  {
+    name: "git update-index --no-assume-unchanged [file]",
+    description:
+      "Resumes tracking changes to a file marked with --assume-unchanged.",
+    example: "To resume tracking, run:",
+    code: "git update-index --no-assume-unchanged config.json",
+    category: "Configuration",
+    difficulty: "advanced",
+  },
 
-	{
-		name: "git reflog",
-		description: "Show a log of all commits that have been referenced in your local repository.",
-		example: "To show a log of all commits that have been referenced in your local repository, run:",
-		code: "git reflog"
-	},
-	{
-		name: "git clean -df",
-		description: "Remove untracked files and directories from the working directory.",
-		example: "To remove untracked files and directories from the working directory, run:",
-		code: "git clean -df"
-	},
-
-	{
-		name: "git show-branch",
-		description: "Show branches and their commits.",
-		example: "To show branches and their commits, run:",
-		code: "git show-branch"
-	},
-	{
-		name: "git cherry-pick [commit]",
-		description: "Apply the changes introduced by the specified commit to the current branch.",
-		example: 'To apply the changes introduced by a commit with hash "abcd123" to the current branch, run:',
-		code: "git cherry-pick abcd123"
-	},
-
-	{
-		name: "git remote show [remote_name]",
-		description: "Display information about a remote repository.",
-		example: 'To display information about the remote repository named "origin", run:',
-		code: "git remote show origin"
-	},
-	{
-		name: "git mv [old_file] [new_file]",
-		description: "Rename or move a file.",
-		example: 'To rename a file named "old.txt" to "new.txt", run:',
-		code: "git mv old.txt new.txt"
-	},
-	{
-		name: "git archive [branch_name] --format=zip --output=[output_file.zip]",
-		description: "Create a zip archive of a branch.",
-		example: 'To create a zip archive of the "master" branch named "repo.zip", run:',
-		code: "git archive master --format=zip --output=repo.zip"
-	},
-
-	{
-		name: "git remote rename [old_name] [new_name]",
-		description: "Rename a remote repository.",
-		example: 'To rename a remote repository named "origin" to "new-origin", run:',
-		code: "git remote rename origin new-origin"
-	},
-	{
-		name: "git remote set-url [remote_name] [new_url]",
-		description: "This command allows you to change the URL of a remote repository in your Git configuration. This is useful when the repository’s URL has changed, or you want to switch between HTTPS and SSH URLs for the remote.",
-		example: 'To change the URL of the remote repository named "origin", run:',
-		code: "git remote set-url origin <new_url>"
-	},
-
-	{
-		name: "git bisect",
-		description: "Use binary search to find the commit that introduced a bug.",
-		example: "To use binary search to find the commit that introduced a bug, run:",
-		code: "git bisect"
-	},
-	{
-		name: "git submodule add [repository_url] [path]",
-		description: "Adds a new submodule to the current repository. This allows you to include an external Git repository inside your project, which can be tracked separately. The submodule will be added at the specified path.",
-		example: "To add a submodule from a repository and place it in a specific path, run:",
-		code: "git submodule add https://github.com/user/repo.git path/to/submodule"
-	},
-	{
-		name: "git submodule init",
-		description: "Initializes the submodules that have been defined in the .gitmodules file but are not yet set up in the local repository. It prepares the submodule configuration so that they can be fetched or updated later.",
-		example: "To initialize all submodules that are declared in the .gitmodules file, run:",
-		code: "git submodule init"
-	},
-	{
-		name: "git submodule update",
-		description: "Fetches the latest commits for all initialized submodules and checks them out in the working directory. This command ensures that the submodules are updated to match the versions specified in the main project.",
-		example: "To fetch and check out the latest changes for all submodules, run:",
-		code: "git submodule update"
-	},
-	{
-		name: "git submodule update -f --init megaset",
-		description: "Forces the update of a specific submodule (megaset) by fetching the submodule's latest content and initializing it if it hasn't been initialized yet. The `-f` option forces the update, and `--init` ensures the submodule is initialized if it hasn't been already. This command is useful if you want to ensure a submodule is fetched and checked out even in the case of conflicts or missing initialization.",
-		example: "To force the update and initialization of the submodule named `megaset`, run:",
-		code: "git submodule update -f --init megaset"
-	},
-
-	{
-		name: "git submodule foreach [command]",
-		description: "Executes a specified command in each of the submodule directories. This is useful for performing the same action (like pulling updates) across all submodules.",
-		example: "To run `git pull` in all submodules, run:",
-		code: "git submodule foreach git pull"
-	},
-	{
-		name: "git submodule deinit [path]",
-		description: "Deinitializes a submodule, removing it from the working directory but keeping its configuration in the .gitmodules file. This does not delete the submodule from the repository, but removes its files locally.",
-		example: "To deinitialize a submodule at a specific path, run:",
-		code: "git submodule deinit path/to/submodule"
-	},
-	{
-		name: "git submodule status",
-		description: "Displays the current status of each submodule in the repository, showing which commit each submodule is checked out at, whether there are uncommitted changes, and more.",
-		example: "To check the current status of all submodules, run:",
-		code: "git submodule status"
-	},
-	{
-		name: "git submodule sync",
-		description: "Updates the URL of submodules in the .git/config file to match those defined in the .gitmodules file. This is useful if the URL of a submodule has changed and you want to synchronize it with the latest configuration.",
-		example: "To synchronize the URLs of all submodules, run:",
-		code: "git submodule sync"
-	},
-	{
-		name: "git submodule remove [path]",
-		description: "Completely removes a submodule from the repository. This process involves deinitializing the submodule, removing the submodule entry from the .gitmodules file, and deleting the submodule's directory and related metadata.",
-		example: "To remove a submodule from the repository entirely, run:",
-		code: "git submodule deinit -f -- path/to/submodule\ngit rm -f path/to/submodule\nrm -rf .git/modules/path/to/submodule"
-	}
+  // Help & Documentation
+  {
+    name: "git help [command]",
+    description:
+      "Opens documentation for a specific Git command. Provides comprehensive help within terminal.",
+    example: "To get help, run:",
+    code: "git help commit",
+    category: "Help & Documentation",
+    difficulty: "beginner",
+  },
+  {
+    name: "git --version",
+    description:
+      "Displays your installed Git version. Useful for checking compatibility and features.",
+    example: "To check version, run:",
+    code: "git --version",
+    category: "Help & Documentation",
+    difficulty: "beginner",
+  },
 ];
 
 export default gitCommands;

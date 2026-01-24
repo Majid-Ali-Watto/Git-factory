@@ -44,7 +44,7 @@
   "dependencies": {
     "html2pdf.js": "^0.10.2",
     "jspdf-autotable": "^3.8.2",
-    "sweetalert2": "^11.12.4",
+    "prop-types": "^15.8.1",
     "vite-plugin-pwa": "^0.20.5"
   }
 }

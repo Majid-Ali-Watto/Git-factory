@@ -1,0 +1,27 @@
+# Git Factory - robots.txt
+# Allow all search engines to crawl and index the website
+
+User-agent: *
+Allow: /
+Disallow: /dev-dist/
+Disallow: /*.json$
+Disallow: /?*
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Sitemap location (replace DOMAIN with your actual Netlify domain)
+Sitemap: https://DOMAIN/sitemap.xml
+
+# Crawl delay (optional - remove if performance allows)
+Crawl-delay: 1
