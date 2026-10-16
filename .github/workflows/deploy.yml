@@ -1,0 +1,81 @@
+name: Build & Deploy to Netlify
+
+# Pull requests: build + deploy a preview at https://pr-<number>--<site>.netlify.app
+# Pushes to main: build + deploy to production.
+#
+# Required repository secrets:   NETLIFY_AUTH_TOKEN, NETLIFY_SITE_ID
+# Optional repository variable:  SITE_URL (canonical origin, e.g. https://git-factory.netlify.app)
+#
+# Disable Netlify's own Git auto-build for this site so this workflow is the
+# only thing that deploys.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "README.md"
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: deploy-${{ github.event.pull_request.number || 'production' }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 7
+
+  deploy:
+    needs: build
+    # Secrets are unavailable to PRs from forks, so only deploy same-repo PRs.
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    env:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+    steps:
+      - uses: actions/checkout@v4 # netlify.toml (headers, redirects)
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: Deploy
+        id: deploy
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            flags="--prod"
+          else
+            flags="--alias=pr-${{ github.event.pull_request.number }}"
+          fi
+          npx --yes netlify-cli@27 deploy --dir=dist $flags \
+            --message "${{ github.sha }}" --json > deploy.json
+          url=$(jq -r '.url // .deploy_url' deploy.json)
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Deployed: $url" >> "$GITHUB_STEP_SUMMARY"

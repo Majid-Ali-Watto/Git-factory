@@ -13,8 +13,8 @@ export default function Loading() {
 				borderRight: "6px solid blueviolet",
 				animation: "rotate 1.5s infinite linear",
 				position: "fixed",
-				top: "45%",
-				left: "45%",
+				top: "50%",
+				left: "50%",
 				transform: "translate(-50%, -50%)"
 			}}>
 			<style>

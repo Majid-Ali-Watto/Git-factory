@@ -15,18 +15,17 @@ const Footer = memo(({ showScrollTop }) => {
 
   return (
     <footer role="contentinfo">
-      <h3>
-        Developer and Author -
+      <p>
+        Built by{" "}
         <a
           rel="noopener noreferrer"
           target="_blank"
           href="https://majidev.netlify.app/"
           aria-label="Visit Majid Ali's portfolio"
         >
-          {" "}
           Majid Ali
         </a>
-      </h3>
+      </p>
       {showScrollTop && (
         <button
           type="button"
@@ -35,7 +34,7 @@ const Footer = memo(({ showScrollTop }) => {
           aria-label="Scroll back to top"
           title="Move to top"
         >
-          <img src="/top.png" className="header-icon" alt="Scroll to top" />
+          <img src="/top.png" className="header-icon" alt="" />
         </button>
       )}
     </footer>

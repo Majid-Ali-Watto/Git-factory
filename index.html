@@ -2,72 +2,121 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Git Commands Cheat Sheet: %COMMAND_COUNT% Commands with Examples | Git Factory</title>
     <meta
       name="description"
-      content="Git Factory - Your ultimate comprehensive guide to Git commands. Learn Git commands, version control, Git workflows, and best practices with practical examples. Perfect for developers of all skill levels."
+      content="Searchable Git cheat sheet with %COMMAND_COUNT% commands, plain-English explanations and copy-ready examples. Filter by category or skill level and download as PDF or HTML."
     />
     <meta
       name="keywords"
-      content="Git, Git commands, Git tutorial, Version control, Git cheat sheet, Git guide, Git usage, Git basics, Git workflow, Git repository, Git tips, Git documentation"
+      content="Git commands, Git cheat sheet, Git tutorial, version control, Git workflow, Git reference, Git examples, Git for beginners"
+    />
+    <meta
+      name="google-site-verification"
+      content="pXDISRoEliHmkYqMQxZ2hZ82H4QhLurpbtwL7ogwOdo"
     />
     <meta name="author" content="Majid Ali" />
     <meta
       name="robots"
       content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     />
-    <meta name="theme-color" content="#2d3436" />
-    <meta
-      property="og:title"
-      content="Git Factory - Comprehensive Git Commands Guide"
-    />
-    <meta
-      property="og:description"
-      content="Learn all Git commands with detailed descriptions, practical examples, and usage instructions. Master version control with Git Factory."
-    />
-    <meta property="og:image" content="/git.png" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en_US" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Git Factory - Git Commands Guide" />
-    <meta
-      name="twitter:description"
-      content="Comprehensive guide to Git commands with examples and best practices."
-    />
-    <meta name="twitter:image" content="/git.png" />
+    <link rel="canonical" href="%SITE_URL%/" />
+
+    <meta name="theme-color" content="#1f2328" />
+    <meta name="color-scheme" content="light" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
     <meta name="apple-mobile-web-app-title" content="Git Factory" />
-    <link rel="icon" type="image/png" href="/git.png" />
-    <link rel="canonical" href="/" />
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-    <link rel="alternate" hreflang="en" href="/" />
-    <title>Git Factory - Comprehensive Git Commands Guide | Learn Git</title>
+    <link rel="icon" type="image/png" href="/git-icon.png" />
+    <link rel="apple-touch-icon" href="/git-icon.png" />
+
+    <meta property="og:site_name" content="Git Factory" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="%SITE_URL%/" />
+    <meta
+      property="og:title"
+      content="Git Commands Cheat Sheet: %COMMAND_COUNT% Commands with Examples"
+    />
+    <meta
+      property="og:description"
+      content="Searchable Git cheat sheet with plain-English explanations and copy-ready examples, from first commit to advanced workflows."
+    />
+    <meta property="og:image" content="%SITE_URL%/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Git Factory - searchable Git commands guide"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Git Commands Cheat Sheet: %COMMAND_COUNT% Commands with Examples"
+    />
+    <meta
+      name="twitter:description"
+      content="Searchable Git cheat sheet with plain-English explanations and copy-ready examples."
+    />
+    <meta name="twitter:image" content="%SITE_URL%/og-image.png" />
+    <meta
+      name="twitter:image:alt"
+      content="Git Factory - searchable Git commands guide"
+    />
+
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Git Factory",
-        "description": "Comprehensive Git commands guide with descriptions, examples, and usage instructions",
-        "url": "/",
-        "applicationCategory": "DeveloperApplication",
-        "author": {
-          "@type": "Person",
-          "name": "Majid Ali"
-        },
-        "image": "/git.png",
-        "screenshot": "/git.png",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": "/?search={search_term_string}"
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "%SITE_URL%/#website",
+            "url": "%SITE_URL%/",
+            "name": "Git Factory",
+            "inLanguage": "en",
+            "publisher": { "@id": "%SITE_URL%/#author" },
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "%SITE_URL%/?search={search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+            }
           },
-          "query-input": "required name=search_term_string"
-        }
+          {
+            "@type": "WebApplication",
+            "@id": "%SITE_URL%/#app",
+            "name": "Git Factory",
+            "url": "%SITE_URL%/",
+            "description": "Searchable Git commands guide with explanations, examples and PDF/HTML export.",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Any",
+            "browserRequirements": "Requires a modern web browser",
+            "image": "%SITE_URL%/og-image.png",
+            "author": { "@id": "%SITE_URL%/#author" },
+            "isPartOf": { "@id": "%SITE_URL%/#website" },
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "Person",
+            "@id": "%SITE_URL%/#author",
+            "name": "Majid Ali",
+            "url": "https://majidev.netlify.app/"
+          }
+        ]
       }
     </script>
   </head>

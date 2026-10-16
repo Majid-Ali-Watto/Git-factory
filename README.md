@@ -1,10 +1,10 @@
 # Git Command Reference Guide
 
-Welcome to the Git Command Reference Guide! This comprehensive application provides 154 Git commands organized by category and difficulty level. Whether you're a beginner or an experienced developer, this guide will help you efficiently navigate Git's powerful version control features.
+Welcome to the Git Command Reference Guide! This comprehensive application provides 153 Git commands organized by category and difficulty level. Whether you're a beginner or an experienced developer, this guide will help you efficiently navigate Git's powerful version control features.
 
 ## 🌟 Features
 
-- **154 Git Commands**: Comprehensive coverage from basic to advanced operations
+- **153 Git Commands**: Comprehensive coverage from basic to advanced operations
 - **14 Organized Categories**: Commands grouped logically by function (Configuration, Branching, Remote, etc.)
 - **3 Difficulty Levels**: Beginner, Intermediate, and Advanced - find commands appropriate to your skill level
 - **Smart Filtering**: Filter and organize commands by category, difficulty, or search keywords
@@ -159,7 +159,7 @@ Difficulty: Advanced
 
 ## 📝 Data Statistics
 
-- **Total Commands**: 154 Git commands
+- **Total Commands**: 153 Git commands
 - **Categories**: 14 organized categories
 - **Difficulty Levels**: 3 skill-appropriate tiers
 - **File Size**: 48.21 KB (optimized)
@@ -269,18 +269,33 @@ Areas for contribution:
 
 **Deployed on Netlify**: [Git-Factory Live](https://git-factory.netlify.app)
 
-### Deployment Steps
+### CI/CD
 
-1. Build the application:
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) builds on every push and pull request:
 
-   ```bash
-   npm run build
-   ```
+- **Pull requests** → preview at `https://pr-<number>--git-factory.netlify.app`
+- **Push to `main`** → production deploy
 
-2. Deploy to Netlify:
-   ```bash
-   netlify deploy --prod
-   ```
+One-time setup (GitHub → Settings → Secrets and variables → Actions):
+
+| Name | Kind | Value |
+| --- | --- | --- |
+| `NETLIFY_AUTH_TOKEN` | secret | Netlify personal access token |
+| `NETLIFY_SITE_ID` | secret | Netlify site → Site configuration → Site ID |
+| `SITE_URL` | variable (optional) | Canonical origin, defaults to `https://git-factory.netlify.app` |
+
+Turn off Netlify's own Git-triggered builds for the site so the workflow is the only deployer.
+
+### SEO
+
+`vite-plugin-seo.js` generates `robots.txt`, `sitemap.xml`, resolves the absolute URLs in `index.html`, and pre-renders the command list into the HTML so crawlers see the content without running JavaScript. The site origin comes from `SITE_URL`, then Netlify's `URL`, then the default above.
+
+### Manual deploy
+
+```bash
+npm run build
+netlify deploy --prod --dir=dist
+```
 
 ## 📱 Mobile Version
 
@@ -292,7 +307,7 @@ A complete native mobile version with same features for iOS and Android.
 
 ### Current Features (v1.0)
 
-- ✅ 154 Git commands with detailed descriptions
+- ✅ 153 Git commands with detailed descriptions
 - ✅ 14 organized categories
 - ✅ 3-tier difficulty system
 - ✅ Smart search and filtering

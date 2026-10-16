@@ -52,12 +52,10 @@ const GitCommandsList = memo(() => {
         selectedCommands={selectedCommands}
         setSelectedCommands={setSelectedCommands}
       />
-      <br />
       <div className="blog-container">
         <MustRead />
-        <br />
         <div ref={commandsListHTMLRef}>
-          <main className="commands-list" ref={commandsListRef} role="main">
+          <main className="commands-list" ref={commandsListRef}>
             {filteredCommands && filteredCommands.length > 0 ? (
               filteredCommands.map((command, index) => (
                 <CommandCard
@@ -68,13 +66,13 @@ const GitCommandsList = memo(() => {
                 />
               ))
             ) : (
-              <div role="status" className="no-commands-message">
-                <p>No commands found. Try adjusting your search.</p>
+              <div className="no-commands-message">
+                <p>No commands found.</p>
+                <p>Try a different search or clear the filters.</p>
               </div>
             )}
           </main>
           <LearnMoreLinks />
-          <br />
           <Footer showScrollTop={showScrollTop} />
         </div>
       </div>

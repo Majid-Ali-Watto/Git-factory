@@ -218,6 +218,7 @@ const gitCommands = [
     code: "git commit --amend",
     category: "Staging & Committing",
     difficulty: "intermediate",
+    warning: "Rewrites the last commit. Don't amend a commit you've already pushed to a shared branch.",
   },
   {
     name: "git commit --amend --no-edit",
@@ -227,6 +228,7 @@ const gitCommands = [
     code: "git commit --amend --no-edit",
     category: "Staging & Committing",
     difficulty: "intermediate",
+    warning: "Rewrites the last commit. Don't amend a commit you've already pushed to a shared branch.",
   },
   {
     name: 'git commit --allow-empty -m "message"',
@@ -289,11 +291,12 @@ const gitCommands = [
   {
     name: "git branch -D [branch_name]",
     description:
-      "Forcefully deletes a branch regardless of merge status. **Destructive** - use only when absolutely sure you want to lose that branch.",
+      "Forcefully deletes a branch regardless of merge status. Destructive - use only when absolutely sure you want to lose that branch.",
     example: "To force delete a branch, run:",
     code: "git branch -D experimental-feature",
     category: "Branching",
     difficulty: "intermediate",
+    warning: "Force-deletes the branch even if it has unmerged commits, which are then hard to recover.",
   },
   {
     name: "git branch -m [old_name] [new_name]",
@@ -459,11 +462,12 @@ const gitCommands = [
   {
     name: "git push --force",
     description:
-      "Forces a push even if it overwrites remote commits. **Use with extreme caution** - can cause loss for other team members. Only use in private branches.",
+      "Forces a push even if it overwrites remote commits. Use with extreme caution - can cause loss for other team members. Only use in private branches.",
     example: "To force push (use cautiously), run:",
     code: "git push --force origin feature-branch",
     category: "Remote",
     difficulty: "advanced",
+    warning: "Overwrites the remote history and can erase teammates' commits. Prefer --force-with-lease.",
   },
   {
     name: "git push --force-with-lease",
@@ -473,6 +477,7 @@ const gitCommands = [
     code: "git push --force-with-lease origin feature-branch",
     category: "Remote",
     difficulty: "advanced",
+    warning: "Still rewrites remote history. Fetch first and only use it on branches you own.",
   },
   {
     name: "git push [remote] --delete [branch]",
@@ -482,6 +487,7 @@ const gitCommands = [
     code: "git push origin --delete feature-old",
     category: "Remote",
     difficulty: "intermediate",
+    warning: "Deletes the branch on the remote for everyone who uses it.",
   },
   {
     name: "git push --tags",
@@ -596,6 +602,7 @@ const gitCommands = [
     code: "git rebase main",
     category: "Merging & Rebasing",
     difficulty: "intermediate",
+    warning: "Rewrites commit history. Don't rebase commits that others have already pulled.",
   },
   {
     name: "git rebase -i [commit]",
@@ -605,6 +612,7 @@ const gitCommands = [
     code: "git rebase -i HEAD~3",
     category: "Merging & Rebasing",
     difficulty: "advanced",
+    warning: "Rewrites commit history. Don't rebase commits that others have already pulled.",
   },
   {
     name: "git rebase --abort",
@@ -711,6 +719,7 @@ const gitCommands = [
     code: "git stash drop stash@{0}",
     category: "Stashing",
     difficulty: "intermediate",
+    warning: "Permanently removes this stash entry.",
   },
   {
     name: "git stash clear",
@@ -720,6 +729,7 @@ const gitCommands = [
     code: "git stash clear",
     category: "Stashing",
     difficulty: "intermediate",
+    warning: "Deletes every stash and cannot be undone.",
   },
   {
     name: "git stash show",
@@ -815,15 +825,7 @@ const gitCommands = [
     code: "git push origin --delete v0.9.0",
     category: "Tagging",
     difficulty: "intermediate",
-  },
-  {
-    name: "git push --tags",
-    description:
-      "Pushes all local tags to remote at once, without pushing any commits. Useful for publishing all release versions.",
-    example: "To push all tags, run:",
-    code: "git push --tags",
-    category: "Tagging",
-    difficulty: "intermediate",
+    warning: "Removes the tag from the remote for everyone who uses it.",
   },
 
   // History & Inspection
@@ -1048,11 +1050,12 @@ const gitCommands = [
   {
     name: "git reset --hard [commit]",
     description:
-      "Completely resets to a previous commit, discarding all changes. **Destructive** - use with caution!",
+      "Completely resets to a previous commit, discarding all changes. Destructive - use with caution!",
     example: "To hard reset, run:",
     code: "git reset --hard abcd123",
     category: "Undoing Changes",
     difficulty: "advanced",
+    warning: "Permanently discards all uncommitted changes in tracked files.",
   },
   {
     name: "git revert [commit]",
@@ -1066,11 +1069,12 @@ const gitCommands = [
   {
     name: "git checkout -- [file]",
     description:
-      "Discards local changes to a file, restoring it to the last commit. **Destructive** - cannot be undone.",
+      "Discards local changes to a file, restoring it to the last commit. Destructive - cannot be undone.",
     example: "To discard changes, run:",
     code: "git checkout -- index.html",
     category: "Undoing Changes",
     difficulty: "intermediate",
+    warning: "Permanently discards your uncommitted changes to the file.",
   },
   {
     name: "git restore [file]",
@@ -1080,6 +1084,7 @@ const gitCommands = [
     code: "git restore index.html",
     category: "Undoing Changes",
     difficulty: "intermediate",
+    warning: "Permanently discards your uncommitted changes to the file.",
   },
   {
     name: "git restore --staged [file]",
@@ -1093,11 +1098,12 @@ const gitCommands = [
   {
     name: "git clean -df",
     description:
-      "Removes untracked files and directories. **Destructive** - use 'git clean -dn' to preview first!",
+      "Removes untracked files and directories. Destructive - use 'git clean -dn' to preview first!",
     example: "To remove untracked files, run:",
     code: "git clean -df",
     category: "Undoing Changes",
     difficulty: "advanced",
+    warning: "Permanently deletes untracked files and directories. Preview first with git clean -dn.",
   },
   {
     name: "git clean -dn",
@@ -1385,11 +1391,12 @@ const gitCommands = [
   {
     name: "git filter-branch",
     description:
-      "Rewrites Git history. Advanced tool for removing sensitive data or restructuring. **Affects other developers!**",
+      "Rewrites Git history. Advanced tool for removing sensitive data or restructuring. Affects other developers!",
     example: "To filter history, run:",
     code: "git filter-branch --tree-filter 'rm -f secrets.txt'",
     category: "Advanced",
     difficulty: "advanced",
+    warning: "Rewrites the entire history and changes every commit hash. Back up first, and consider git filter-repo instead.",
   },
   {
     name: "git for-each-ref",

@@ -16,9 +16,9 @@ import Alert from "../utils/alert-message.js";
 import localAlert from "../utils/local-alert.js";
 
 const DOWNLOAD_OPTIONS = {
-  tablePdf: "Download PDF Table",
-  listPdf: "Download PDF List",
-  listHtml: "Download HTML List",
+  tablePdf: "Table (PDF)",
+  listPdf: "List (PDF)",
+  listHtml: "List (HTML)",
 };
 
 /**
@@ -42,7 +42,10 @@ const Header = memo(
     selectedCommands,
     setSelectedCommands,
   }) => {
-    const [searchQuery, setSearchQuery] = useState("");
+    // Honours /?search=term so the SearchAction in the page's structured data works.
+    const [searchQuery, setSearchQuery] = useState(
+      () => new URLSearchParams(window.location.search).get("search") ?? "",
+    );
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedDifficulty, setSelectedDifficulty] = useState("");
     const [selectedOption, setSelectedOption] = useState(
@@ -90,21 +93,8 @@ const Header = memo(
       setFilteredCommands,
     ]);
 
-    const handleChange = useCallback(async (event) => {
-      let selectedValue = event.target.value;
-
-      if (!selectedValue) {
-        const { value: downloadType } = await localAlert.fire({
-          title: "Select Download Type",
-          input: "select",
-          inputOptions: DOWNLOAD_OPTIONS,
-          showCancelButton: false,
-          showCloseButton: true,
-        });
-        selectedValue = DOWNLOAD_OPTIONS[downloadType];
-      }
-
-      setSelectedOption(selectedValue);
+    const handleChange = useCallback((event) => {
+      setSelectedOption(event.target.value);
     }, []);
 
     const handleDownload = useCallback(async () => {
@@ -171,126 +161,132 @@ const Header = memo(
     const copyButtonTitle = `Copy ${selectedCommands.length} selected commands`;
 
     return (
-      <header className="search-container" role="banner">
-        <div className="header-brand">
-          <h1 className="app-title">
-            <span className="git-icon">⚙️</span> Git Commands Guide
-          </h1>
-          <input
-            type="search"
-            placeholder="Type 'basic commands' or search commands..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-            aria-label="Search Git commands"
-            aria-describedby="search-hint"
-          />
-          <span id="search-hint" className="sr-only">
-            Search by command name, description, or category
-          </span>
-        </div>
-        <div className="header-filters">
-          <select
-            className="filter-select"
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-            aria-label="Filter by category"
-          >
-            <option value="">All Categories</option>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
+      <header className="site-header" role="banner">
+        <div className="header-inner">
+          <div className="header-brand">
+            <img
+              src="/git-icon.png"
+              alt=""
+              className="brand-logo"
+              width="40"
+              height="40"
+            />
+            <div className="brand-text">
+              <h1 className="app-title">Git Commands Guide</h1>
+            </div>
+          </div>
 
-          <select
-            className="filter-select"
-            value={selectedDifficulty}
-            onChange={handleDifficultyChange}
-            aria-label="Filter by difficulty level"
-          >
-            <option value="">All Difficulty Levels</option>
-            <option value="beginner">🟢 Beginner</option>
-            <option value="intermediate">🟡 Intermediate</option>
-            <option value="advanced">🔴 Advanced</option>
-          </select>
-        </div>
+          <div className="header-controls">
+            <input
+              type="search"
+              className="search-input"
+              placeholder="Search commands…"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              aria-label="Search Git commands"
+              aria-describedby="search-hint"
+            />
+            <span id="search-hint" className="sr-only">
+              Search by command name, description, or category
+            </span>
 
-        <div className="selection-buttons">
-          {selectedCommands.length >= 2 && (
-            <button
-              type="button"
-              title={copyButtonTitle}
-              onClick={() => copySelected(selectedCommands)}
-              className="icon-button"
-              aria-label={copyButtonTitle}
+            <select
+              className="filter-select"
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+              aria-label="Filter by category"
             >
-              <img src="/copy.png" alt="" className="header-icon" />
-            </button>
-          )}
+              <option value="">Categories</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
 
-          <button
-            type="button"
-            title="Select All Commands"
-            onClick={selectAll}
-            className="icon-button"
-            aria-label="Select all commands"
-          >
-            <img src="/select.png" alt="" className="header-icon" />
-          </button>
-
-          {selectedCommands.length >= 2 && (
-            <button
-              type="button"
-              title="Unselect All Commands"
-              onClick={unselectAll}
-              className="icon-button"
-              aria-label="Unselect all commands"
+            <select
+              className="filter-select"
+              value={selectedDifficulty}
+              onChange={handleDifficultyChange}
+              aria-label="Filter by difficulty level"
             >
-              <img src="/delete.png" alt="" className="header-icon" />
-            </button>
-          )}
+              <option value="">Levels</option>
+              <option value="beginner">🟢 Beginner</option>
+              <option value="intermediate">🟡 Intermediate</option>
+              <option value="advanced">🔴 Advanced</option>
+            </select>
+          </div>
 
-          <button
-            type="button"
-            title="Download Selected Commands"
-            onClick={handleDownload}
-            className="icon-button"
-            aria-label="Download commands"
-          >
-            <img src="/download.png" alt="" className="header-icon" />
-          </button>
+          <div className="toolbar">
+            <p className="result-count" role="status" aria-live="polite">
+              {filteredCommands.length} command
+              {filteredCommands.length === 1 ? "" : "s"}
+              {selectedCommands.length > 0 &&
+                ` | ${selectedCommands.length} selected`}
+            </p>
 
-          {/* Select Dropdown for large screens */}
-          <select
-            ref={downloadDropdownRef}
-            className="select-dropdown"
-            value={selectedOption}
-            onChange={handleChange}
-            aria-label="Select download format"
-          >
-            <option value={DOWNLOAD_OPTIONS.tablePdf}>
-              {DOWNLOAD_OPTIONS.tablePdf}
-            </option>
-            <option value={DOWNLOAD_OPTIONS.listPdf}>
-              {DOWNLOAD_OPTIONS.listPdf}
-            </option>
-            <option value={DOWNLOAD_OPTIONS.listHtml}>
-              {DOWNLOAD_OPTIONS.listHtml}
-            </option>
-          </select>
+            <div className="selection-actions">
+              <button
+                type="button"
+                title="Select All Commands"
+                onClick={selectAll}
+                className="icon-button"
+                aria-label="Select all commands"
+              >
+                <img src="/select.png" alt="" className="header-icon" />
+              </button>
 
-          {/* Hamburger Menu for small screens */}
-          <button
-            type="button"
-            className="hamburger-menu"
-            onClick={handleChange}
-            aria-label="Menu"
-          >
-            <div></div>
-            <div></div>
-            <div></div>
-          </button>
+              {selectedCommands.length >= 2 && (
+                <>
+                  <button
+                    type="button"
+                    title={copyButtonTitle}
+                    onClick={() => copySelected(selectedCommands)}
+                    className="icon-button"
+                    aria-label={copyButtonTitle}
+                  >
+                    <img src="/copy.png" alt="" className="header-icon" />
+                  </button>
+                  <button
+                    type="button"
+                    title="Unselect All Commands"
+                    onClick={unselectAll}
+                    className="icon-button"
+                    aria-label="Unselect all commands"
+                  >
+                    <img src="/delete.png" alt="" className="header-icon" />
+                  </button>
+                </>
+              )}
+            </div>
+
+            <div className="download-actions">
+              <select
+                ref={downloadDropdownRef}
+                className="select-dropdown"
+                value={selectedOption}
+                onChange={handleChange}
+                aria-label="Select download format"
+              >
+                {Object.values(DOWNLOAD_OPTIONS).map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+
+              <button
+                type="button"
+                title="Download Selected Commands"
+                onClick={handleDownload}
+                className="download-button"
+                aria-label="Download commands"
+              >
+                <img src="/download.png" alt="" className="header-icon" />
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
         </div>
       </header>
     );

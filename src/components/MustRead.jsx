@@ -12,27 +12,14 @@ const MustRead = memo(() => {
   }, []);
 
   return (
-    <section aria-labelledby="must-read-heading">
-      <ul>
-        <li className="must-read">
-          <strong
-            id="must-read-heading"
-            role="button"
-            tabIndex={0}
-            onClick={handleClick}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                handleClick();
-              }
-            }}
-            style={{ cursor: "pointer" }}
-          >
-            Must Read
-          </strong>
-          <h3>Guide to Push for First Time</h3>
-        </li>
-      </ul>
+    <section aria-label="First-time setup">
+      <button type="button" className="must-read" onClick={handleClick}>
+        <span className="must-read-label">Must read</span>
+        <span className="must-read-title">Guide to push for the first time</span>
+        <span className="must-read-arrow" aria-hidden="true">
+          →
+        </span>
+      </button>
     </section>
   );
 });

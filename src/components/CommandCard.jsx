@@ -23,7 +23,10 @@ const CommandCard = memo(({ command, onSelect, selected }) => {
   };
 
   return (
-    <article className={`command-card${selected ? " selected" : ""}`}>
+    <article
+      className={`command-card${selected ? " selected" : ""}`}
+      data-difficulty={command.difficulty}
+    >
       <div className="command-card-header">
         <input
           type="checkbox"
@@ -36,7 +39,12 @@ const CommandCard = memo(({ command, onSelect, selected }) => {
           <h2 className="command-title">{command.name}</h2>
           <div className="command-meta">
             {command.category && (
-              <span className="category-tag">{command.category}</span>
+              <span className="category-tag command-category">{command.category}</span>
+            )}
+            {command.basic && (
+              <span className="essential-tag" title="Part of the basic commands set">
+                ★ Essential
+              </span>
             )}
             {command.difficulty && (
               <span
@@ -51,6 +59,11 @@ const CommandCard = memo(({ command, onSelect, selected }) => {
         </div>
       </div>
       <p className="command-description">{command.description}</p>
+      {command.warning && (
+        <p className="command-warning" role="note">
+          <strong>Caution:</strong> {command.warning}
+        </p>
+      )}
       {command.example && (
         <p className="command-example">
           <strong>Example:</strong> {command.example}
@@ -86,6 +99,7 @@ CommandCard.propTypes = {
     example: PropTypes.string,
     code: PropTypes.string.isRequired,
     basic: PropTypes.string,
+    warning: PropTypes.string,
   }).isRequired,
   onSelect: PropTypes.func.isRequired,
   selected: PropTypes.bool.isRequired,
