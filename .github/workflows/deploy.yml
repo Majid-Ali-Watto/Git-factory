@@ -74,7 +74,7 @@ jobs:
           else
             flags="--alias=pr-${{ github.event.pull_request.number }}"
           fi
-          npx --yes netlify-cli@27 deploy --dir=dist $flags \
+          npx --yes netlify-cli@27 deploy --no-build --dir=dist $flags \
             --message "${{ github.sha }}" --json > deploy.json
           url=$(jq -r '.url // .deploy_url' deploy.json)
           echo "url=$url" >> "$GITHUB_OUTPUT"
